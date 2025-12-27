@@ -2,16 +2,38 @@ import type { Field, GroupField } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
 
-export type LinkAppearances = 'default' | 'outline'
+export type LinkAppearances =
+  | 'default'
+  | 'accent'
+  | 'accent-dark'
+  | 'secondary'
+  | 'lavender'
+  | 'light'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
     label: 'Default',
     value: 'default',
   },
-  outline: {
-    label: 'Outline',
-    value: 'outline',
+  accent: {
+    label: 'Accent (Orange)',
+    value: 'accent',
+  },
+  'accent-dark': {
+    label: 'Accent Dark (Orange, Dark Text)',
+    value: 'accent-dark',
+  },
+  secondary: {
+    label: 'Secondary (Frozen Green)',
+    value: 'secondary',
+  },
+  lavender: {
+    label: 'Lavender',
+    value: 'lavender',
+  },
+  light: {
+    label: 'Light (White)',
+    value: 'light',
   },
 }
 
@@ -118,7 +140,14 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline]
+    let appearanceOptionsToUse = [
+      appearanceOptions.default,
+      appearanceOptions.accent,
+      appearanceOptions['accent-dark'],
+      appearanceOptions.secondary,
+      appearanceOptions.lavender,
+      appearanceOptions.light,
+    ]
 
     if (appearances) {
       appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])
@@ -134,6 +163,16 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       options: appearanceOptionsToUse,
     })
   }
+
+  linkResult.fields.push({
+    name: 'showArrow',
+    type: 'checkbox',
+    admin: {
+      description: 'Display an arrow icon before the link text.',
+    },
+    defaultValue: false,
+    label: 'Show arrow',
+  })
 
   return deepMerge(linkResult, overrides)
 }

@@ -15,6 +15,7 @@ type CMSLinkType = {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
   } | null
+  showArrow?: boolean | null
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
@@ -29,6 +30,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     label,
     newTab,
     reference,
+    showArrow = false,
     size: sizeFromProps,
     url,
   } = props
@@ -45,6 +47,21 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   const size = appearance === 'link' ? 'clear' : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
+  // Map old arrow variants to new color variants (backward compatibility)
+  let mappedAppearance = appearance
+  let mappedShowArrow = showArrow
+
+  if (appearance === 'arrow') {
+    mappedAppearance = 'lavender'
+    mappedShowArrow = true
+  } else if (appearance === 'arrow-light') {
+    mappedAppearance = 'light'
+    mappedShowArrow = true
+  } else if (appearance === 'arrow-filled') {
+    mappedAppearance = 'accent-dark'
+    mappedShowArrow = true
+  }
+
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
@@ -56,7 +73,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   }
 
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
+    <Button
+      asChild
+      className={className}
+      size={size}
+      variant={mappedAppearance as ButtonProps['variant']}
+      showArrow={mappedShowArrow}
+    >
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}

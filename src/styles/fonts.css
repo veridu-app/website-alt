@@ -1,0 +1,111 @@
+/* Mona Sans - Regular */
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mona Sans - Medium */
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mona Sans - SemiBold */
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mona Sans - Bold */
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans/MonaSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mona Sans SemiExpanded - Medium */
+@font-face {
+  font-family: 'Mona Sans SemiExpanded';
+  src: url('/fonts/mona-sans/MonaSans_SemiExpanded-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans SemiExpanded';
+  src: url('/fonts/mona-sans/MonaSans_SemiExpanded-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mona Sans SemiExpanded - SemiBold */
+@font-face {
+  font-family: 'Mona Sans SemiExpanded';
+  src: url('/fonts/mona-sans/MonaSans_SemiExpanded-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans SemiExpanded';
+  src: url('/fonts/mona-sans/MonaSans_SemiExpanded-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Royal Couture */
+@font-face {
+  font-family: 'Royal Couture';
+  src: url('/fonts/royal-couture/RoyaleCouture-Serif.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+

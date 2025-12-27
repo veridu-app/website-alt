@@ -9,7 +9,6 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  darkMode: ['selector', '[data-theme="dark"]'],
   plugins: [tailwindcssAnimate, typography],
   prefix: '',
   safelist: [
@@ -56,6 +55,14 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        // Veridu Brand Colors
+        'frozen-green': '#D2FAF3',
+        lavender: '#E0E4FF',
+        'off-white': '#FDF9FF',
+        'dark-teal': '#003A43',
+        cerulean: '#086C87',
+        orange: '#E9710E',
+        // Legacy colors (mapped to Veridu colors for compatibility)
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
@@ -94,8 +101,10 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
+        sans: ['Mona Sans', 'Verdana', 'sans-serif'],
+        semiexpanded: ['Mona Sans SemiExpanded', 'Mona Sans', 'Verdana', 'sans-serif'],
+        highlight: ['Royal Couture', 'Mona Sans', 'serif'],
         mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
       },
       keyframes: {
         'accordion-down': {

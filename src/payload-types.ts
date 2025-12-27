@@ -159,6 +159,9 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    /**
+     * Tipp: Shift+Enter für Zeilenumbruch ohne Absatz
+     */
     richText?: {
       root: {
         type: string;
@@ -193,7 +196,11 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+            /**
+             * Display an arrow icon before the link text.
+             */
+            showArrow?: boolean | null;
           };
           id?: string | null;
         }[]
@@ -476,7 +483,11 @@ export interface CallToActionBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: 'default' | null;
+          /**
+           * Display an arrow icon before the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -526,7 +537,11 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+          /**
+           * Display an arrow icon before the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1074,6 +1089,7 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                     label?: T;
                     appearance?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };
@@ -1120,6 +1136,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -1146,6 +1163,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -1651,6 +1669,10 @@ export interface Header {
               } | null);
           url?: string | null;
           label: string;
+          /**
+           * Display an arrow icon before the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1680,6 +1702,10 @@ export interface Footer {
               } | null);
           url?: string | null;
           label: string;
+          /**
+           * Display an arrow icon before the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1703,6 +1729,7 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -1726,6 +1753,7 @@ export interface FooterSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
