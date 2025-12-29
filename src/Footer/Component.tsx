@@ -15,8 +15,8 @@ export async function Footer() {
   return (
     <footer className="mt-auto border-t border-dark-teal/20 bg-dark-teal text-off-white">
       <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <Logo />
+        <Link className="flex items-center w-[5rem]" href="/">
+          <Logo color="white" variant="vertical" />
         </Link>
 
         <nav className="flex flex-col md:flex-row gap-4">

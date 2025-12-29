@@ -7,8 +7,10 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { FeaturePreview } from '../../blocks/FeaturePreview/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
@@ -72,7 +74,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, FeaturePreview],
               required: true,
               admin: {
                 initCollapsed: true,
@@ -117,40 +119,12 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'backgroundColor',
-      type: 'select',
-      options: [
-        {
-          label: 'Off White',
-          value: 'off-white',
-        },
-        {
-          label: 'Frozen Green',
-          value: 'frozen-green',
-        },
-        {
-          label: 'Lavender',
-          value: 'lavender',
-        },
-        {
-          label: 'Dark Teal',
-          value: 'dark-teal',
-        },
-        {
-          label: 'Cerulean',
-          value: 'cerulean',
-        },
-        {
-          label: 'Orange',
-          value: 'orange',
-        },
-      ],
+    backgroundColorField({
       admin: {
         position: 'sidebar',
         description: 'Hintergrundfarbe für die gesamte Seite',
       },
-    },
+    }),
     slugField(),
   ],
   hooks: {

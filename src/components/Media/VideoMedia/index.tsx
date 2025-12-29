@@ -36,6 +36,11 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
         onClick={onClick}
         playsInline
         ref={videoRef}
+        style={{
+          width: '100%',
+          aspectRatio: '16 / 9', 
+          objectFit: 'cover'
+        }}
       >
         <source src={getMediaUrl(`/media/${filename}`)} />
       </video>

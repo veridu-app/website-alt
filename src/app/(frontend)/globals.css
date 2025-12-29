@@ -76,6 +76,19 @@
     );
   }
 
+  .cut-all-corners {
+    clip-path: polygon(
+      1.125rem 0%,
+      calc(100% - 1.125rem) 0%,
+      100% 1.125rem,
+      100% calc(100% - 1.125rem),
+      calc(100% - 1.125rem) 100%,
+      1.125rem 100%,
+      0% calc(100% - 1.125rem),
+      0% 1.125rem
+    );
+  }
+
   .button-outline-wrapper {
     position: relative;
     display: inline-flex;
