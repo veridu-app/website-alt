@@ -215,6 +215,7 @@ export interface Page {
     | FormBlock
     | FeaturePreviewBlock
     | TestimonialsBlock
+    | InfoCardsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -890,6 +891,52 @@ export interface TestimonialsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InfoCardsBlock".
+ */
+export interface InfoCardsBlock {
+  title?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  infoCards: {
+    text: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional: Bild hochladen
+     */
+    image?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'infoCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1199,6 +1246,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         featurePreview?: T | FeaturePreviewBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
+        infoCards?: T | InfoCardsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1332,6 +1380,22 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         quote?: T;
         image?: T;
         school?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InfoCardsBlock_select".
+ */
+export interface InfoCardsBlockSelect<T extends boolean = true> {
+  title?: T;
+  infoCards?:
+    | T
+    | {
+        text?: T;
+        image?: T;
         id?: T;
       };
   id?: T;

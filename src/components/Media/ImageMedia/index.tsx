@@ -50,11 +50,14 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
 
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
+  // For fill images, use a more conservative default size to avoid loading oversized images
   const sizes = sizeFromProps
     ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
-        .join(', ')
+    : fill
+      ? '100vw' // For fill images, default to viewport width (more conservative)
+      : Object.entries(breakpoints)
+          .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
+          .join(', ')
 
   return (
     <picture className={cn(pictureClassName)}>

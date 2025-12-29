@@ -33,6 +33,24 @@
         "panel": "dedicated"
       },
       "group": "build"
+    },
+    {
+      "label": "Payload: Generate Types and Importmap",
+      "type": "shell",
+      "icon": {
+        "id": "database",
+        "color": "terminal.ansiCyan"
+      },
+      "command": "pnpm generate:types && pnpm generate:importmap",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Generiert TypeScript-Typen und Importmap für Payload CMS"
     }
   ]
 }

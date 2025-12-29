@@ -18,10 +18,6 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
   const [scrollPosition, setScrollPosition] = useState(0)
   const [maxScroll, setMaxScroll] = useState(0)
 
-  if (!testimonials || testimonials.length === 0) {
-    return null
-  }
-
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -49,6 +45,10 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
       resizeObserver.disconnect()
     }
   }, [testimonials])
+
+  if (!testimonials || testimonials.length === 0) {
+    return null
+  }
 
   const scrollLeft = () => {
     const container = scrollContainerRef.current
@@ -149,7 +149,7 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
                 {/* Quote Section */}
                 {testimonial.quote && (
                   <blockquote className="text-lg lg:text-xl font-medium italic flex-1">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </blockquote>
                 )}
 
@@ -157,7 +157,12 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
                 <div className="flex items-center gap-4">
                   {testimonial.image && typeof testimonial.image === 'object' && (
                     <div className="relative w-24 h-24 flex-shrink-0 rounded-full overflow-hidden">
-                      <Media resource={testimonial.image} fill imgClassName="object-cover" />
+                      <Media
+                        resource={testimonial.image}
+                        fill
+                        imgClassName="object-cover"
+                        size="96px"
+                      />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
