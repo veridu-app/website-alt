@@ -207,7 +207,15 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | FeaturePreviewBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | FeaturePreviewBlock
+    | TestimonialsBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -803,8 +811,7 @@ export interface Form {
  * via the `definition` "FeaturePreviewBlock".
  */
 export interface FeaturePreviewBlock {
-  media: number | Media;
-  description: {
+  title?: {
     root: {
       type: string;
       children: {
@@ -818,12 +825,68 @@ export interface FeaturePreviewBlock {
       version: number;
     };
     [k: string]: unknown;
-  };
-  position: 'left' | 'right';
-  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+  } | null;
+  featurePreviews: {
+    media: number | Media;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    position: 'left' | 'right';
+    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'featurePreview';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  title?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  testimonials: {
+    name: string;
+    quote: string;
+    /**
+     * Optional: Bild der Person hochladen
+     */
+    image?: (number | null) | Media;
+    /**
+     * Optional: Name der Schule
+     */
+    school?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1135,6 +1198,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         featurePreview?: T | FeaturePreviewBlockSelect<T>;
+        testimonials?: T | TestimonialsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1242,10 +1306,34 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "FeaturePreviewBlock_select".
  */
 export interface FeaturePreviewBlockSelect<T extends boolean = true> {
-  media?: T;
-  description?: T;
-  position?: T;
-  backgroundColor?: T;
+  title?: T;
+  featurePreviews?:
+    | T
+    | {
+        media?: T;
+        description?: T;
+        position?: T;
+        backgroundColor?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  title?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        quote?: T;
+        image?: T;
+        school?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

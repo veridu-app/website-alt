@@ -38,8 +38,9 @@ export const backgroundColorOptions: Array<{ label: string; value: BackgroundCol
 type BackgroundColorFieldOptions = {
   name?: string
   required?: boolean
+  dbName?: string
   admin?: {
-    position?: 'sidebar' | 'main'
+    position?: 'sidebar'
     description?: string
   }
 }
@@ -49,23 +50,17 @@ type BackgroundColorFieldOptions = {
  * @param options - Optional configuration for the field
  * @returns A Payload select field configuration for background colors
  */
-export const backgroundColorField = (
-  options: BackgroundColorFieldOptions = {},
-): Field => {
-  const {
-    name = 'backgroundColor',
-    required = false,
-    admin = {},
-  } = options
+export const backgroundColorField = (options: BackgroundColorFieldOptions = {}): Field => {
+  const { name = 'backgroundColor', required = false, dbName, admin = {} } = options
 
   return {
     name,
     type: 'select',
     options: backgroundColorOptions,
     required,
+    ...(dbName && { dbName }),
     admin: {
       ...admin,
     },
   }
 }
-

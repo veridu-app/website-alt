@@ -7,14 +7,37 @@ import {
   lexicalEditor,
   UnderlineFeature,
   type LinkFields,
+  FixedToolbarFeature,
+  HeadingFeature,
 } from '@payloadcms/richtext-lexical'
+import { TextColorFeature, TextFontFamilyFeature } from 'payload-lexical-typography'
 
 export const defaultLexical = lexicalEditor({
   features: [
+    FixedToolbarFeature(),
+    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
     ParagraphFeature(),
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
+    TextFontFamilyFeature({
+      fontFamilies: [
+        { value: "'Mona Sans', Verdana, sans-serif", label: 'Mona Sans' },
+        { value: "'Royal Couture', serif", label: 'Royal Couture' },
+      ],
+      customFontFamily: false,
+    }),
+    TextColorFeature({
+      colors: [
+        { value: '#003A43', label: 'Dark Teal' },
+        { value: '#086C87', label: 'Cerulean' },
+        { value: '#E9710E', label: 'Orange' },
+        { value: '#D2FAF3', label: 'Frozen Green' },
+        { value: '#FDF9FF', label: 'Off White' },
+        { value: '#E0E4FF', label: 'Lavender' },
+      ],
+      colorPicker: true,
+    }),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {
