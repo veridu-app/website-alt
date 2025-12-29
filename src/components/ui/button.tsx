@@ -4,7 +4,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import * as React from 'react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap text-sm font-semiexpanded font-semibold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 button-cut-corners',
+  'inline-flex items-center justify-center whitespace-nowrap text-sm font-semiexpanded font-semibold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     defaultVariants: {
       size: 'default',
@@ -24,15 +24,16 @@ const buttonVariants = cva(
         false: '',
       },
       variant: {
-        default: 'bg-cerulean text-off-white hover:bg-cerulean/90',
-        accent: 'bg-orange text-off-white hover:bg-orange/90',
-        'accent-dark': 'bg-orange text-dark-teal hover:bg-orange/90',
-        secondary: 'bg-frozen-green text-dark-teal hover:bg-frozen-green/80',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        default: 'bg-cerulean text-off-white hover:bg-cerulean/90 button-cut-corners',
+        accent: 'bg-orange text-off-white hover:bg-orange/90 button-cut-corners',
+        'accent-dark': 'bg-orange text-dark-teal hover:bg-orange/90 button-cut-corners',
+        secondary: 'bg-frozen-green text-dark-teal hover:bg-frozen-green/80 button-cut-corners',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90 button-cut-corners',
         ghost: 'hover:bg-lavender hover:text-dark-teal',
         link: 'text-cerulean items-start justify-start underline-offset-4 hover:underline',
-        lavender: 'bg-lavender text-dark-teal hover:bg-lavender/80',
-        light: 'bg-off-white text-dark-teal hover:bg-off-white/90',
+        lavender: 'bg-lavender text-dark-teal hover:bg-lavender/80 button-cut-corners',
+        light: 'bg-off-white text-dark-teal hover:bg-off-white/90 button-cut-corners',
       },
     },
   },

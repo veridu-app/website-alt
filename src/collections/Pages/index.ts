@@ -117,6 +117,40 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'backgroundColor',
+      type: 'select',
+      options: [
+        {
+          label: 'Off White',
+          value: 'off-white',
+        },
+        {
+          label: 'Frozen Green',
+          value: 'frozen-green',
+        },
+        {
+          label: 'Lavender',
+          value: 'lavender',
+        },
+        {
+          label: 'Dark Teal',
+          value: 'dark-teal',
+        },
+        {
+          label: 'Cerulean',
+          value: 'cerulean',
+        },
+        {
+          label: 'Orange',
+          value: 'orange',
+        },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für die gesamte Seite',
+      },
+    },
     slugField(),
   ],
   hooks: {

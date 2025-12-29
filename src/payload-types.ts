@@ -218,6 +218,10 @@ export interface Page {
   };
   publishedAt?: string | null;
   /**
+   * Hintergrundfarbe für die gesamte Seite
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
@@ -1112,6 +1116,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  backgroundColor?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;

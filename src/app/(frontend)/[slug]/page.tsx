@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import BackgroundColor from './BackgroundColor.client'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -64,19 +65,22 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const { hero, layout, backgroundColor } = page
 
   return (
-    <article className="pt-16 pb-24">
-      <PageClient />
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+    <>
+      <BackgroundColor color={backgroundColor} />
+      <article className="pt-16 pb-24">
+        <PageClient />
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
 
-      {draft && <LivePreviewListener />}
+        {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
-    </article>
+        <RenderHero {...hero} />
+        <RenderBlocks blocks={layout} />
+      </article>
+    </>
   )
 }
 
