@@ -2,17 +2,10 @@
 
 import { useEffect } from 'react'
 
+import { backgroundColorClassMap } from '@/utilities/backgroundColor'
+
 type BackgroundColorProps = {
   color?: string | null
-}
-
-const colorClassMap: Record<string, string> = {
-  'off-white': 'bg-off-white',
-  'frozen-green': 'bg-frozen-green',
-  lavender: 'bg-lavender',
-  'dark-teal': 'bg-dark-teal',
-  cerulean: 'bg-cerulean',
-  orange: 'bg-orange',
 }
 
 export default function BackgroundColor({ color }: BackgroundColorProps) {
@@ -20,13 +13,13 @@ export default function BackgroundColor({ color }: BackgroundColorProps) {
     const body = document.body
 
     // Remove all background color classes
-    Object.values(colorClassMap).forEach((className) => {
+    Object.values(backgroundColorClassMap).forEach((className) => {
       body.classList.remove(className)
     })
 
     // Add the new background color class or default
-    if (color && colorClassMap[color]) {
-      body.classList.add(colorClassMap[color])
+    if (color && backgroundColorClassMap[color]) {
+      body.classList.add(backgroundColorClassMap[color])
     } else {
       // Default to off-white if no color is specified
       body.classList.add('bg-off-white')
@@ -34,7 +27,7 @@ export default function BackgroundColor({ color }: BackgroundColorProps) {
 
     // Cleanup function to restore default on unmount
     return () => {
-      Object.values(colorClassMap).forEach((className) => {
+      Object.values(backgroundColorClassMap).forEach((className) => {
         body.classList.remove(className)
       })
       body.classList.add('bg-off-white')
