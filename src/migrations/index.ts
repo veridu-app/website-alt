@@ -5,6 +5,7 @@ import * as migration_20251229_130028 from './20251229_130028'
 import * as migration_20251229_130729 from './20251229_130729'
 import * as migration_20251229_152758 from './20251229_152758'
 import * as migration_20251229_162754_info_cards from './20251229_162754_info_cards'
+import * as migration_20251229_172741_fix_background_color from './20251229_172741_fix_background_color'
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20251229_162754_info_cards.up,
     down: migration_20251229_162754_info_cards.down,
     name: '20251229_162754_info_cards',
+  },
+  {
+    up: migration_20251229_172741_fix_background_color.up,
+    down: migration_20251229_172741_fix_background_color.down,
+    name: '20251229_172741_fix_background_color',
   },
 ]
