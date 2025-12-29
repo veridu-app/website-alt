@@ -78,6 +78,11 @@ export default buildConfig({
   globals: [Header, Footer],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
+  upload: {
+    limits: {
+      fileSize: 500 * 1024 * 1024, // 500MB in bytes
+    },
+  },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
