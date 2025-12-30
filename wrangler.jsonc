@@ -18,8 +18,8 @@
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "6de5a419-1bb7-4013-8025-b6b8ebb27384",
-      "database_name": "veridu-website",
+      "database_id": "33851dd8-ecc6-4aa9-a772-6d93373833f2",
+      "database_name": "veridu-website-test",
       "remote": true,
     },
   ],
