@@ -51,6 +51,53 @@
       },
       "problemMatcher": [],
       "detail": "Generiert TypeScript-Typen und Importmap für Payload CMS"
+    },
+    {
+      "label": "Payload: Create Migration",
+      "type": "shell",
+      "command": "npm run payload migrate:create",
+      "args": ["${input:migrationName}"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Payload: Run Migrations",
+      "type": "shell",
+      "command": "npm run payload:migrate",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "type": "promptString",
+      "description": "Enter the migration name (e.g., add_new_field_to_posts)",
+      "default": ""
     }
   ]
 }

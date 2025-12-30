@@ -39,9 +39,7 @@ export const InfoCards: Block = {
             description: 'Optional: Bild hochladen',
           },
         },
-        backgroundColorField({
-          dbName: 'bg_color',
-        }),
+        backgroundColorField(),
         {
           name: 'catchInfo',
           type: 'group',

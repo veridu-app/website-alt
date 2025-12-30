@@ -10,8 +10,10 @@ import * as migration_20251230_115546_add_background_color_to_info_cards from '.
 import * as migration_20251230_122426_add_catch_info_and_footnotes_to_info_cards from './20251230_122426_add_catch_info_and_footnotes_to_info_cards'
 import * as migration_20251230_133127_add_catch_info_position_and_banner_color from './20251230_133127_add_catch_info_position_and_banner_color'
 import * as migration_20251230_145406_add_view_all_link_to_archive_block from './20251230_145406_add_view_all_link_to_archive_block'
-import * as migration_20251230_180000_fix_footnotes_table_structure from './20251230_180000_fix_footnotes_table_structure'
 import * as migration_20251230_151200_fix_archive_link_field_structure from './20251230_151200_fix_archive_link_field_structure'
+import * as migration_20251230_151300_rename_bg_color_to_background_color from './20251230_151300_rename_bg_color_to_background_color'
+import * as migration_20251230_165633 from './20251230_165633'
+import * as migration_20251230_180000_fix_footnotes_table_structure from './20251230_180000_fix_footnotes_table_structure'
 
 export const migrations = [
   {
@@ -75,13 +77,23 @@ export const migrations = [
     name: '20251230_145406_add_view_all_link_to_archive_block',
   },
   {
-    up: migration_20251230_180000_fix_footnotes_table_structure.up,
-    down: migration_20251230_180000_fix_footnotes_table_structure.down,
-    name: '20251230_180000_fix_footnotes_table_structure',
-  },
-  {
     up: migration_20251230_151200_fix_archive_link_field_structure.up,
     down: migration_20251230_151200_fix_archive_link_field_structure.down,
     name: '20251230_151200_fix_archive_link_field_structure',
+  },
+  {
+    up: migration_20251230_151300_rename_bg_color_to_background_color.up,
+    down: migration_20251230_151300_rename_bg_color_to_background_color.down,
+    name: '20251230_151300_rename_bg_color_to_background_color',
+  },
+  {
+    up: migration_20251230_165633.up,
+    down: migration_20251230_165633.down,
+    name: '20251230_165633',
+  },
+  {
+    up: migration_20251230_180000_fix_footnotes_table_structure.up,
+    down: migration_20251230_180000_fix_footnotes_table_structure.down,
+    name: '20251230_180000_fix_footnotes_table_structure',
   },
 ]
