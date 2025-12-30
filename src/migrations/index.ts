@@ -6,6 +6,9 @@ import * as migration_20251229_130729 from './20251229_130729'
 import * as migration_20251229_152758 from './20251229_152758'
 import * as migration_20251229_162754_info_cards from './20251229_162754_info_cards'
 import * as migration_20251229_172741_fix_background_color from './20251229_172741_fix_background_color'
+import * as migration_20251230_115546_add_background_color_to_info_cards from './20251230_115546_add_background_color_to_info_cards'
+import * as migration_20251230_122426_add_catch_info_and_footnotes_to_info_cards from './20251230_122426_add_catch_info_and_footnotes_to_info_cards'
+import * as migration_20251230_133127_add_catch_info_position_and_banner_color from './20251230_133127_add_catch_info_position_and_banner_color'
 
 export const migrations = [
   {
@@ -47,5 +50,20 @@ export const migrations = [
     up: migration_20251229_172741_fix_background_color.up,
     down: migration_20251229_172741_fix_background_color.down,
     name: '20251229_172741_fix_background_color',
+  },
+  {
+    up: migration_20251230_115546_add_background_color_to_info_cards.up,
+    down: migration_20251230_115546_add_background_color_to_info_cards.down,
+    name: '20251230_115546_add_background_color_to_info_cards',
+  },
+  {
+    up: migration_20251230_122426_add_catch_info_and_footnotes_to_info_cards.up,
+    down: migration_20251230_122426_add_catch_info_and_footnotes_to_info_cards.down,
+    name: '20251230_122426_add_catch_info_and_footnotes_to_info_cards',
+  },
+  {
+    up: migration_20251230_133127_add_catch_info_position_and_banner_color.up,
+    down: migration_20251230_133127_add_catch_info_position_and_banner_color.down,
+    name: '20251230_133127_add_catch_info_position_and_banner_color',
   },
 ]

@@ -13,6 +13,10 @@ type Props = {
   className?: string
 } & TestimonialsBlockProps
 
+const cardWidth = window.innerWidth >= 1024 ? 500 : 400
+const gap = window.innerWidth >= 1024 ? 32 : 24
+const scrollAmount = cardWidth + gap
+
 export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimonials }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -24,7 +28,7 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
 
     const updateScrollState = () => {
       const { scrollLeft, scrollWidth, clientWidth } = container
-      const maxScrollValue = scrollWidth - clientWidth + 16
+      const maxScrollValue = scrollWidth - clientWidth
 
       setScrollPosition(scrollLeft)
       setMaxScroll(maxScrollValue)
@@ -54,20 +58,12 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
     const container = scrollContainerRef.current
     if (!container) return
 
-    const cardWidth = window.innerWidth >= 1024 ? 500 : 400
-    const gap = window.innerWidth >= 1024 ? 32 : 24
-    const scrollAmount = cardWidth + gap
-
     container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
   }
 
   const scrollRight = () => {
     const container = scrollContainerRef.current
     if (!container) return
-
-    const cardWidth = window.innerWidth >= 1024 ? 500 : 400
-    const gap = window.innerWidth >= 1024 ? 32 : 24
-    const scrollAmount = cardWidth + gap
 
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
   }
@@ -119,17 +115,13 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
         {/* Scrollable Container */}
         <div
           ref={scrollContainerRef}
-          className="overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          className="overflow-x-auto pb-4 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           role="region"
           aria-label="Testimonials carousel"
           tabIndex={0}
           onKeyDown={(e) => {
             const container = scrollContainerRef.current
             if (!container) return
-
-            const cardWidth = window.innerWidth >= 1024 ? 508 : 408
-            const gap = window.innerWidth >= 1024 ? 32 : 24
-            const scrollAmount = cardWidth + gap
 
             if (e.key === 'ArrowLeft') {
               e.preventDefault()

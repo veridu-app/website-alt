@@ -64,3 +64,35 @@ export const backgroundColorField = (options: BackgroundColorFieldOptions = {}):
     },
   }
 }
+
+/**
+ * Helper function to get text color based on background color
+ * @param backgroundColor - The background color value
+ * @returns Tailwind CSS text color class
+ */
+export const getTextColorForBackground = (
+  backgroundColor?: BackgroundColorValue | string | null,
+): string => {
+  if (!backgroundColor) return 'text-accent-foreground'
+
+  // Dark backgrounds need light text
+  if (backgroundColor === 'dark-teal' || backgroundColor === 'cerulean') {
+    return 'text-lavender'
+  }
+
+  // Light backgrounds need dark text
+  if (
+    backgroundColor === 'off-white' ||
+    backgroundColor === 'frozen-green' ||
+    backgroundColor === 'lavender'
+  ) {
+    return 'text-dark-teal'
+  }
+
+  // Orange uses accent-foreground
+  if (backgroundColor === 'orange') {
+    return 'text-accent-foreground'
+  }
+
+  return 'text-foreground'
+}

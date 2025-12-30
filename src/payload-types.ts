@@ -929,6 +929,45 @@ export interface InfoCardsBlock {
      * Optional: Bild hochladen
      */
     image?: (number | null) | Media;
+    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    /**
+     * Auffällige Statistik für den Badge (z.B. "30%" links, "aller Lehrkräfte leiden unter psychischen Belastungen" rechts)
+     */
+    catchInfo?: {
+      /**
+       * Aktivieren, um die Catch Info anzuzeigen
+       */
+      enabled?: boolean | null;
+      /**
+       * Große Zahl oder Statistik (z.B. "30%", "1 von 3")
+       */
+      value?: string | null;
+      /**
+       * Beschreibender Text, der umbrechen kann
+       */
+      text?: string | null;
+      /**
+       * Position des Banners in der Karte
+       */
+      position?: ('between' | 'floating') | null;
+      /**
+       * Farbe des Banners
+       */
+      bannerColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    };
+    /**
+     * Optional: Fußnoten am Ende der Card (können mit Link versehen werden)
+     */
+    footnotes?:
+      | {
+          text: string;
+          /**
+           * Optional: URL für klickbare Fußnote
+           */
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -1396,6 +1435,23 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
     | {
         text?: T;
         image?: T;
+        backgroundColor?: T;
+        catchInfo?:
+          | T
+          | {
+              enabled?: T;
+              value?: T;
+              text?: T;
+              position?: T;
+              bannerColor?: T;
+            };
+        footnotes?:
+          | T
+          | {
+              text?: T;
+              url?: T;
+              id?: T;
+            };
         id?: T;
       };
   id?: T;
