@@ -17,6 +17,7 @@ import { r2Storage } from '@payloadcms/storage-r2'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,6 +72,7 @@ export default buildConfig({
   db: sqliteD1Adapter({
     binding: cloudflare.env.D1,
     migrationDir: path.resolve(dirname, 'migrations'),
+    prodMigrations: migrations,
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
