@@ -56,10 +56,6 @@
       "label": "Payload: Create Migration",
       "type": "shell",
       "command": "npm run payload migrate:create",
-      "args": ["${input:migrationName}"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -75,10 +71,7 @@
     {
       "label": "Payload: Run Migrations",
       "type": "shell",
-      "command": "npm run payload:migrate",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
+      "command": "npm run payload migrate",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -90,14 +83,6 @@
         "kind": "build",
         "isDefault": false
       }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "migrationName",
-      "type": "promptString",
-      "description": "Enter the migration name (e.g., add_new_field_to_posts)",
-      "default": ""
     }
   ]
 }
