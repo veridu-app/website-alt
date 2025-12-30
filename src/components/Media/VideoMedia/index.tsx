@@ -24,7 +24,10 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
   }, [])
 
   if (resource && typeof resource === 'object') {
-    const { filename } = resource
+    const { url } = resource
+    const cacheTag = resource.updatedAt
+
+    if (!url) return null
 
     return (
       <video
@@ -38,11 +41,11 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
         ref={videoRef}
         style={{
           width: '100%',
-          aspectRatio: '16 / 9', 
-          objectFit: 'cover'
+          aspectRatio: '16 / 9',
+          objectFit: 'cover',
         }}
       >
-        <source src={getMediaUrl(`/media/${filename}`)} />
+        <source src={getMediaUrl(url, cacheTag)} />
       </video>
     )
   }
