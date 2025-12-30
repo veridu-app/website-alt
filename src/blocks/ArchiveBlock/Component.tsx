@@ -62,6 +62,10 @@ export const ArchiveBlock: React.FC<
     }
   }
 
+  if (posts.length === 0) {
+    return null
+  }
+
   return (
     <div className="my-16" id={`block-${id}`}>
       {introContent && (
