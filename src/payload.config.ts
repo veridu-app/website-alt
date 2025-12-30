@@ -28,7 +28,6 @@ const isProduction = process.env.NODE_ENV === 'production'
 // This prevents Worker validation errors (error 10021) that occur when top-level code
 // exceeds CPU/memory limits or performs async operations during initialization
 let cloudflareContext: CloudflareContext | null = null
-let cloudflareContextInitPromise: Promise<CloudflareContext> | null = null
 
 // Lazy getter for Cloudflare context - initializes only when first accessed
 // This defers initialization until runtime, avoiding Worker validation errors
