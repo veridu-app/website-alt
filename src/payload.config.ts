@@ -68,27 +68,15 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: sqliteD1Adapter({ binding: cloudflare.env.NEXT_TAG_CACHE_D1 }),
-  // db: vercelPostgresAdapter({
-  //   pool: {
-  //     connectionString: process.env.POSTGRES_URL || '',
-  //   },
-  // }),
+  db: sqliteD1Adapter({ binding: cloudflare.env.D1 }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,
     r2Storage({
-      bucket: cloudflare.env.NEXT_INC_CACHE_R2_BUCKET,
+      bucket: cloudflare.env.R2,
       collections: { media: true },
     }),
-    // vercelBlobStorage({
-    //   collections: {
-    //     media: true,
-    //   },
-    //   token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    //   clientUploads: true,
-    // }),
   ],
   globals: [Header, Footer],
   secret: process.env.PAYLOAD_SECRET,
