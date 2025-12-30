@@ -7,6 +7,8 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+import { link } from '@/fields/link'
+
 export const Archive: Block = {
   slug: 'archive',
   interfaceName: 'ArchiveBlock',
@@ -86,6 +88,21 @@ export const Archive: Block = {
       label: 'Selection',
       relationTo: ['posts'],
     },
+    {
+      name: 'showViewAllLink',
+      type: 'checkbox',
+      label: 'Show "View All" Link',
+      defaultValue: false,
+    },
+    link({
+      overrides: {
+        admin: {
+          condition: (_data, siblingData) => {
+            return Boolean(siblingData?.showViewAllLink)
+          },
+        },
+      },
+    }),
   ],
   labels: {
     plural: 'Archives',

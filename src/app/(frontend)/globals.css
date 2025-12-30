@@ -15,7 +15,7 @@
 
   :root {
     /* Veridu Brand Colors */
-    --background: 300 100% 99.6%; /* Off White #FDF9FF */
+    --background: 234 100% 95%; /* Lavender #E0E4FF */
     --foreground: 187 100% 13%; /* Dark Teal #003A43 */
 
     --card: 170 70% 92%; /* Frozen Green #D2FAF3 */
@@ -56,7 +56,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-off-white text-dark-teal min-h-[100vh] flex flex-col;
+    @apply bg-lavender text-dark-teal min-h-[100vh] flex flex-col;
+    transition: background-color 0.4s ease-in-out;
   }
 }
 

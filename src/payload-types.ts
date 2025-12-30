@@ -603,6 +603,30 @@ export interface ArchiveBlock {
         value: number | Post;
       }[]
     | null;
+  showViewAllLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+    /**
+     * Display an arrow icon before the link text.
+     */
+    showArrow?: boolean | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -1374,6 +1398,18 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  showViewAllLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        showArrow?: T;
+      };
   id?: T;
   blockName?: T;
 }

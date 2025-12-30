@@ -6,13 +6,23 @@ import React from 'react'
 import RichText from '@/components/RichText'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { CMSLink } from '@/components/Link'
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
     id?: string
   }
 > = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
+  const {
+    id,
+    categories,
+    introContent,
+    limit: limitFromProps,
+    populateBy,
+    selectedDocs,
+    showViewAllLink,
+    link: viewAllLink,
+  } = props
 
   const limit = limitFromProps || 3
 
@@ -55,11 +65,20 @@ export const ArchiveBlock: React.FC<
   return (
     <div className="my-16" id={`block-${id}`}>
       {introContent && (
-        <div className="container mb-16">
-          <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
+        <div className="container mb-8 flex justify-center">
+          <RichText
+            className="mx-auto max-w-[48rem] text-center"
+            data={introContent}
+            enableGutter={false}
+          />
         </div>
       )}
       <CollectionArchive posts={posts} />
+      {showViewAllLink && viewAllLink && (
+        <div className="container mt-8 text-center">
+          <CMSLink {...viewAllLink} />
+        </div>
+      )}
     </div>
   )
 }

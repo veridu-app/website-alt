@@ -6,8 +6,14 @@ import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import { Menu, X } from 'lucide-react'
+import { cn } from '@/utilities/ui'
 
-export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+interface HeaderNavProps {
+  data: HeaderType
+  textColor?: string
+}
+
+export const HeaderNav: React.FC<HeaderNavProps> = ({ data, textColor = 'text-dark-teal' }) => {
   const navItems = data?.navItems || []
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -44,14 +50,16 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* Desktop Navigation */}
       <div className="hidden md:flex gap-3 items-center">
         {navItems.map(({ link }, i) => {
-          return <CMSLink key={i} {...link} appearance="link" />
+          return <CMSLink key={i} {...link} appearance="link" className={cn(textColor)} />
         })}
+        {/* TODO: Add a link to the starten page */}
+        <CMSLink label="starten" url="https://veridu.app" appearance="accent" className="ml-4" />
       </div>
 
       {/* Mobile Hamburger Button */}
       <button
         type="button"
-        className="md:hidden p-2 -mr-2 text-dark-teal hover:text-cerulean transition-colors"
+        className={cn('md:hidden p-2 -mr-2 transition-colors', textColor, 'hover:text-cerulean')}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
         aria-expanded={isMenuOpen}
@@ -71,7 +79,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             {navItems.map(({ link }, i) => {
               return (
                 <div key={i} onClick={handleLinkClick}>
-                  <CMSLink {...link} appearance="link" className="text-lg" />
+                  <CMSLink {...link} appearance="link" className={cn('text-lg', textColor)} />
                 </div>
               )
             })}
