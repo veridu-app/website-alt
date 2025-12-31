@@ -18,6 +18,11 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      // Vercel Blob Storage pattern
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
   },
   webpack: (webpackConfig) => {
