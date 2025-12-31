@@ -13,14 +13,28 @@ type Props = {
   className?: string
 } & TestimonialsBlockProps
 
-const cardWidth = window.innerWidth >= 1024 ? 500 : 400
-const gap = window.innerWidth >= 1024 ? 32 : 24
-const scrollAmount = cardWidth + gap
-
 export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimonials }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [maxScroll, setMaxScroll] = useState(0)
+
+  const [cardWidth, setCardWidth] = useState(400)
+  const [gap, setGap] = useState(24)
+  const scrollAmount = cardWidth + gap
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (typeof window !== 'undefined') {
+        setCardWidth(window.innerWidth >= 1024 ? 500 : 400)
+        setGap(window.innerWidth >= 1024 ? 32 : 24)
+      }
+    }
+
+    updateDimensions()
+
+    window.addEventListener('resize', updateDimensions)
+    return () => window.removeEventListener('resize', updateDimensions)
+  }, [])
 
   useEffect(() => {
     const container = scrollContainerRef.current
