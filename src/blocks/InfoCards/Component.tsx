@@ -7,15 +7,29 @@ import { Media } from '@/components/Media'
 import { backgroundColorClassMap } from '@/utilities/backgroundColor'
 import { getTextColorForBackground } from '@/fields/backgroundColor'
 import Link from 'next/link'
+import { CMSLink } from '@/components/Link'
 
 type Props = {
   className?: string
 } & InfoCardsBlockProps
 
-export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards }) => {
+export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, cardsPerRow }) => {
   if (!infoCards || infoCards.length === 0) {
     return null
   }
+
+  const cardsPerRowValue = cardsPerRow || '3'
+  const cardsPerRowNumber = parseInt(cardsPerRowValue, 10)
+  const totalCards = infoCards.length
+  const shouldCenter = totalCards < cardsPerRowNumber
+
+  const gridColsClass =
+    cardsPerRowValue === '4'
+      ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+
+  const cardPaddingClass = cardsPerRowValue === '4' ? 'p-3 sm:p-4' : 'p-5 sm:p-8'
+  const gridGapClass = cardsPerRowValue === '4' ? 'gap-3 sm:gap-4' : 'gap-5 sm:gap-8'
 
   return (
     <div className={cn('container overflow-visible', className)}>
@@ -27,7 +41,48 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards })
       )}
 
       {/* Info Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 overflow-visible pb-12">
+      {shouldCenter && (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              ${
+                cardsPerRowValue === '4'
+                  ? `
+                    @media (min-width: 768px) {
+                      .info-cards-grid-centered-${totalCards} {
+                        grid-template-columns: repeat(${Math.min(totalCards, 3)}, minmax(0, 1fr)) !important;
+                        max-width: calc(100% * ${Math.min(totalCards, 3)} / 3);
+                      }
+                    }
+                  `
+                  : `
+                    @media (min-width: 768px) {
+                      .info-cards-grid-centered-${totalCards} {
+                        grid-template-columns: repeat(${Math.min(totalCards, 2)}, minmax(0, 1fr)) !important;
+                        max-width: calc(100% * ${Math.min(totalCards, 2)} / 2);
+                      }
+                    }
+                  `
+              }
+              @media (min-width: 1024px) {
+                .info-cards-grid-centered-${totalCards} {
+                  grid-template-columns: repeat(${totalCards}, minmax(0, 1fr)) !important;
+                  max-width: calc(100% * ${totalCards} / ${cardsPerRowNumber});
+                }
+              }
+            `,
+          }}
+        />
+      )}
+      <div
+        className={cn(
+          'grid',
+          gridColsClass,
+          gridGapClass,
+          'overflow-visible pb-12',
+          shouldCenter && `mx-auto info-cards-grid-centered-${totalCards}`,
+        )}
+      >
         {infoCards.map((infoCard, index) => {
           const bgClass = infoCard.backgroundColor
             ? backgroundColorClassMap[infoCard.backgroundColor]
@@ -40,7 +95,8 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards })
             >
               <div
                 className={cn(
-                  'rounded-lg overflow-hidden p-8 button-cut-corners flex flex-col gap-6 relative flex-1',
+                  'rounded-lg overflow-hidden button-cut-corners flex flex-col gap-6 relative flex-1',
+                  cardPaddingClass,
                   bgClass,
                   infoCard.catchInfo &&
                     infoCard.catchInfo.enabled &&
@@ -122,6 +178,13 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards })
                         return <p key={idx}>{footnoteContent}</p>
                       })}
                     </div>
+                  </div>
+                )}
+
+                {/* Button Section */}
+                {infoCard.showButton && infoCard.link && (
+                  <div className="mt-auto pt-4">
+                    <CMSLink {...infoCard.link} />
                   </div>
                 )}
               </div>

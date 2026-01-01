@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 
 import { defaultLexical } from '@/fields/defaultLexical'
 import { backgroundColorField, backgroundColorOptions } from '@/fields/backgroundColor'
+import { link } from '@/fields/link'
 
 export const InfoCards: Block = {
   slug: 'infoCards',
@@ -150,7 +151,46 @@ export const InfoCards: Block = {
             description: 'Optional: Fußnoten am Ende der Card (können mit Link versehen werden)',
           },
         },
+        {
+          name: 'showButton',
+          type: 'checkbox',
+          label: 'Button anzeigen',
+          defaultValue: false,
+          admin: {
+            description: 'Aktivieren, um einen Button am Ende der Karte anzuzeigen',
+          },
+        },
+        link({
+          dbName: 'card_link',
+          appearanceDbName: 'card_link_appearance',
+          overrides: {
+            admin: {
+              condition: (_data, siblingData) => {
+                return Boolean(siblingData?.showButton)
+              },
+            },
+          },
+        }),
       ],
+    },
+    {
+      name: 'cardsPerRow',
+      type: 'select',
+      label: 'Cards per Row',
+      defaultValue: '3',
+      options: [
+        {
+          label: '3 Cards',
+          value: '3',
+        },
+        {
+          label: '4 Cards',
+          value: '4',
+        },
+      ],
+      admin: {
+        description: 'Number of cards displayed per row on large screens',
+      },
     },
   ],
   labels: {

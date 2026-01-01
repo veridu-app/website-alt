@@ -997,8 +997,39 @@ export interface InfoCardsBlock {
           id?: string | null;
         }[]
       | null;
+    /**
+     * Aktivieren, um einen Button am Ende der Karte anzuzeigen
+     */
+    showButton?: boolean | null;
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+      /**
+       * Display an arrow icon before the link text.
+       */
+      showArrow?: boolean | null;
+    };
     id?: string | null;
   }[];
+  /**
+   * Number of cards displayed per row on large screens
+   */
+  cardsPerRow?: ('3' | '4') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'infoCards';
@@ -1585,8 +1616,21 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
               url?: T;
               id?: T;
             };
+        showButton?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+              showArrow?: T;
+            };
         id?: T;
       };
+  cardsPerRow?: T;
   id?: T;
   blockName?: T;
 }
