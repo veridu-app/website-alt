@@ -34,6 +34,7 @@ const buttonVariants = cva(
         link: 'text-cerulean items-start justify-start underline-offset-4 hover:underline',
         lavender: 'bg-lavender text-dark-teal hover:bg-lavender/80 button-cut-corners',
         light: 'bg-off-white text-dark-teal hover:bg-off-white/90 button-cut-corners',
+        textbutton: 'text-dark-teal hover:text-cerulean underline-offset-4 hover:underline',
       },
     },
   },

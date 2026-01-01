@@ -13,10 +13,10 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
       <div className="flex flex-col lg:flex-row md:gap-12 lg:gap-14 xl:gap-16 px-4">
         <div className="lg:w-2/3 mb-8 lg:mb-0 relative lg:flex lg:items-center">
           <div
-            className="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center"
+            className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center"
             style={{ zIndex: -1 }}
           >
-            <VeriduSymbol />
+            <VeriduSymbol strokeWidth='1px' />
           </div>
 
           <div className="relative z-10 text-center text-center">

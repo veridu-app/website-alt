@@ -9,6 +9,7 @@ export type LinkAppearances =
   | 'secondary'
   | 'lavender'
   | 'light'
+  | 'textbutton'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
@@ -35,18 +36,31 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
     label: 'Light (White)',
     value: 'light',
   },
+  textbutton: {
+    label: 'Text Button',
+    value: 'textbutton',
+  },
 }
 
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
+  dbName?: string
+  appearanceDbName?: string
   overrides?: Partial<GroupField>
 }) => Field
 
-export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+export const link: LinkType = ({
+  appearances,
+  disableLabel = false,
+  dbName,
+  appearanceDbName,
+  overrides = {},
+} = {}) => {
   const linkResult: GroupField = {
     name: 'link',
     type: 'group',
+    ...(dbName && { dbName }),
     admin: {
       hideGutter: true,
     },
@@ -147,6 +161,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       appearanceOptions.secondary,
       appearanceOptions.lavender,
       appearanceOptions.light,
+      appearanceOptions.textbutton,
     ]
 
     if (appearances) {
@@ -156,6 +171,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     linkResult.fields.push({
       name: 'appearance',
       type: 'select',
+      ...(appearanceDbName && { dbName: appearanceDbName }),
       admin: {
         description: 'Choose how the link should be rendered.',
       },

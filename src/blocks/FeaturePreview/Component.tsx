@@ -19,13 +19,13 @@ export const FeaturePreviewBlock: React.FC<Props> = ({ className, title, feature
     <div className={cn('container', className)}>
       {/* Title Section */}
       {title && (
-        <div className="mb-8 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+        <div className="mb-16 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
 
       {/* Feature Previews List */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-24">
         {featurePreviews.map((featurePreview, index) => {
           const { media, description, position = 'left', backgroundColor } = featurePreview
           const bgClass = backgroundColor ? backgroundColorClassMap[backgroundColor] : 'bg-card'
@@ -33,35 +33,33 @@ export const FeaturePreviewBlock: React.FC<Props> = ({ className, title, feature
           return (
             <div
               key={featurePreview.id || index}
-              className={cn(
-                'border border-border rounded-lg overflow-hidden p-8 cut-all-corners',
-                bgClass,
-                'flex flex-col gap-8 lg:gap-16',
-                {
-                  'lg:flex-row': position === 'left',
-                  'lg:flex-row-reverse': position === 'right',
-                },
-              )}
+              className={cn('flex flex-col gap-8 lg:gap-16 lg:items-center', {
+                'lg:flex-row': position === 'left',
+                'lg:flex-row-reverse': position === 'right',
+              })}
             >
-              {/* Media Section */}
-              <div className="relative lg:w-3/5 flex-shrink-0 cut-all-corners">
+              {/* Media Section - Outside Card */}
+              <div className="relative lg:w-1/2 flex-shrink-0 cut-all-corners">
                 {media && typeof media === 'object' && (
                   <Media resource={media} className="w-full h-full object-cover" />
                 )}
               </div>
 
-              {/* Description Section */}
-              <div className="flex-1 flex">
-                <div className="w-full">
-                  {description && (
-                    <RichText
-                      data={description}
-                      enableGutter={false}
-                      enableProse={true}
-                      className="max-w-none"
-                    />
-                  )}
-                </div>
+              {/* Description Section - Inside Card */}
+              <div
+                className={cn(
+                  'w-full border border-border rounded-lg overflow-hidden p-8 cut-all-corners',
+                  bgClass,
+                )}
+              >
+                {description && (
+                  <RichText
+                    data={description}
+                    enableGutter={false}
+                    enableProse={true}
+                    className="max-w-none"
+                  />
+                )}
               </div>
             </div>
           )

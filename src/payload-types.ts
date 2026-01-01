@@ -196,7 +196,9 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+            appearance?:
+              | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+              | null;
             /**
              * Display an arrow icon before the link text.
              */
@@ -216,6 +218,7 @@ export interface Page {
     | FeaturePreviewBlock
     | TestimonialsBlock
     | InfoCardsBlock
+    | AccordionInfoBlock
   )[];
   meta?: {
     title?: string | null;
@@ -550,7 +553,9 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+          appearance?:
+            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+            | null;
           /**
            * Display an arrow icon before the link text.
            */
@@ -621,7 +626,7 @@ export interface ArchiveBlock {
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light') | null;
+    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
     /**
      * Display an arrow icon before the link text.
      */
@@ -1000,6 +1005,97 @@ export interface InfoCardsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccordionInfoBlock".
+ */
+export interface AccordionInfoBlock {
+  title?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  accordionItems: {
+    title: string;
+    expandedContent: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    showButton?: boolean | null;
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+      /**
+       * Display an arrow icon before the link text.
+       */
+      showArrow?: boolean | null;
+    };
+    id?: string | null;
+  }[];
+  showViewAllLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+    /**
+     * Display an arrow icon before the link text.
+     */
+    showArrow?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accordionInfo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1310,6 +1406,7 @@ export interface PagesSelect<T extends boolean = true> {
         featurePreview?: T | FeaturePreviewBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         infoCards?: T | InfoCardsBlockSelect<T>;
+        accordionInfo?: T | AccordionInfoBlockSelect<T>;
       };
   meta?:
     | T
@@ -1489,6 +1586,46 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccordionInfoBlock_select".
+ */
+export interface AccordionInfoBlockSelect<T extends boolean = true> {
+  title?: T;
+  accordionItems?:
+    | T
+    | {
+        title?: T;
+        expandedContent?: T;
+        showButton?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+              showArrow?: T;
+            };
+        id?: T;
+      };
+  showViewAllLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        showArrow?: T;
       };
   id?: T;
   blockName?: T;

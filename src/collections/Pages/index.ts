@@ -10,6 +10,7 @@ import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { FeaturePreview } from '../../blocks/FeaturePreview/config'
 import { Testimonials } from '../../blocks/Testimonials/config'
 import { InfoCards } from '../../blocks/InfoCards/config'
+import { AccordionInfo } from '../../blocks/AccordionInfo/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { backgroundColorField } from '@/fields/backgroundColor'
@@ -85,6 +86,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeaturePreview,
                 Testimonials,
                 InfoCards,
+                AccordionInfo,
               ],
               required: true,
               admin: {

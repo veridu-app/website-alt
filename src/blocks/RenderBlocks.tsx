@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { FeaturePreviewBlock } from '@/blocks/FeaturePreview/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import { InfoCardsBlock } from '@/blocks/InfoCards/Component'
+import { AccordionInfoBlock } from '@/blocks/AccordionInfo/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   featurePreview: FeaturePreviewBlock,
   testimonials: TestimonialsBlock,
   infoCards: InfoCardsBlock,
+  accordionInfo: AccordionInfoBlock,
 }
 
 export const RenderBlocks: React.FC<{
