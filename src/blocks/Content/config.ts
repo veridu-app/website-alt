@@ -1,6 +1,7 @@
 import type { Block, Field } from 'payload'
 
 import {
+  AlignFeature,
   ChecklistFeature,
   FixedToolbarFeature,
   HeadingFeature,
@@ -10,6 +11,7 @@ import {
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
 
+import { appColorOptions } from '@/fields/appColor'
 import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
@@ -37,6 +39,25 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'alignment',
+    type: 'select',
+    defaultValue: 'left',
+    options: [
+      {
+        label: 'Left',
+        value: 'left',
+      },
+      {
+        label: 'Center',
+        value: 'center',
+      },
+      {
+        label: 'Right',
+        value: 'right',
+      },
+    ],
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
@@ -46,6 +67,7 @@ const columnFields: Field[] = [
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          AlignFeature(),
           ChecklistFeature(),
           OrderedListFeature(),
           UnorderedListFeature(),
@@ -53,6 +75,20 @@ const columnFields: Field[] = [
       },
     }),
     label: false,
+  },
+  {
+    name: 'enableBox',
+    type: 'checkbox',
+  },
+  {
+    name: 'boxColor',
+    type: 'select',
+    options: appColorOptions,
+    admin: {
+      condition: (_data, siblingData) => {
+        return Boolean(siblingData?.enableBox)
+      },
+    },
   },
   {
     name: 'enableLink',

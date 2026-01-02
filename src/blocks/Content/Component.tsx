@@ -3,6 +3,7 @@ import React from 'react'
 import RichText from '@/components/RichText'
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
+import { backgroundColorClassMap } from '@/fields/appColor'
 
 import { CMSLink } from '../../components/Link'
 
@@ -22,18 +23,73 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
+            const {
+              enableLink,
+              link,
+              richText,
+              size,
+              alignment = 'left',
+              enableBox,
+              boxColor,
+            } = col
+
+            const colSpan = colsSpanClasses[size!]
+            const boxBgClass = enableBox && boxColor ? backgroundColorClassMap[boxColor] : undefined
+
+            const content = (
+              <>
+                {richText && <RichText data={richText} enableGutter={false} />}
+                {enableLink && <CMSLink {...link} />}
+              </>
+            )
+
+            // Calculate column start position based on alignment and size
+            const getColStart = () => {
+              if (!size || size === 'full' || !alignment || alignment === 'left') return undefined
+
+              // Map of size and alignment to col-start classes
+              const colStartMap: Record<string, Record<string, string | undefined>> = {
+                oneThird: {
+                  left: undefined,
+                  center: 'lg:col-start-5', // (12-4)/2 + 1 = 5
+                  right: 'lg:col-start-9', // 12-4+1 = 9
+                },
+                half: {
+                  left: undefined,
+                  center: 'lg:col-start-4', // (12-6)/2 + 1 = 4
+                  right: 'lg:col-start-7', // 12-6+1 = 7
+                },
+                twoThirds: {
+                  left: undefined,
+                  center: 'lg:col-start-3', // (12-8)/2 + 1 = 3
+                  right: 'lg:col-start-5', // 12-8+1 = 5
+                },
+              }
+
+              return colStartMap[size]?.[alignment] || undefined
+            }
+
+            const colStart = getColStart()
 
             return (
               <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
-                  'md:col-span-2': size !== 'full',
-                })}
+                className={cn(
+                  `col-span-4 lg:col-span-${colSpan}`,
+                  {
+                    'md:col-span-2': size !== 'full',
+                  },
+                  colStart,
+                  {
+                    'h-full': enableBox,
+                  },
+                )}
                 key={index}
               >
-                {richText && <RichText data={richText} enableGutter={false} />}
-
-                {enableLink && <CMSLink {...link} />}
+                {enableBox && boxBgClass ? (
+                  <div className={cn(boxBgClass, 'p-4 rounded-xl h-full')}>{content}</div>
+                ) : (
+                  content
+                )}
               </div>
             )
           })}

@@ -1,5 +1,6 @@
 import type { TextFieldSingleValidation } from 'payload'
 import {
+  AlignFeature,
   BoldFeature,
   ItalicFeature,
   LinkFeature,
@@ -23,6 +24,7 @@ export const defaultLexical = lexicalEditor({
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
+    AlignFeature(),
     TextFontFamilyFeature({
       fontFamilies: [
         { value: "'Mona Sans', Verdana, sans-serif", label: 'Mona Sans' },

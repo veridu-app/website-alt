@@ -83,6 +83,16 @@
         "kind": "build",
         "isDefault": false
       }
+    },
+    {
+      "label": "Kill Port 3000",
+      "type": "shell",
+      "command": "chmod +x ${workspaceFolder}/.vscode/kill-port.sh && ${workspaceFolder}/.vscode/kill-port.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
     }
   ]
 }

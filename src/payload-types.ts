@@ -521,6 +521,7 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        alignment?: ('left' | 'center' | 'right') | null;
         richText?: {
           root: {
             type: string;
@@ -536,6 +537,8 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
+        enableBox?: boolean | null;
+        boxColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -1550,7 +1553,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | T
     | {
         size?: T;
+        alignment?: T;
         richText?: T;
+        enableBox?: T;
+        boxColor?: T;
         enableLink?: T;
         link?:
           | T
