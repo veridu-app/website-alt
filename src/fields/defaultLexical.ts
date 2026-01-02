@@ -9,6 +9,9 @@ import {
   type LinkFields,
   FixedToolbarFeature,
   HeadingFeature,
+  ChecklistFeature,
+  UnorderedListFeature,
+  OrderedListFeature,
 } from '@payloadcms/richtext-lexical'
 import { TextColorFeature, TextFontFamilyFeature } from 'payload-lexical-typography'
 
@@ -38,6 +41,9 @@ export const defaultLexical = lexicalEditor({
       ],
       colorPicker: true,
     }),
+    ChecklistFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {

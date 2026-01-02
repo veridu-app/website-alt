@@ -122,9 +122,17 @@ const config = {
             {
               '--tw-prose-body': 'var(--text)',
               '--tw-prose-headings': 'var(--text)',
+              '--tw-prose-bullets': 'currentColor',
+              '--tw-prose-counters': 'currentColor',
               h1: {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',
+              },
+              'ul > li::marker': {
+                color: 'inherit',
+              },
+              'ol > li::marker': {
+                color: 'inherit',
               },
             },
           ],

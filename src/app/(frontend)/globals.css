@@ -96,6 +96,14 @@
   }
 }
 
+/* RichText List Styles - Force list markers to inherit text color */
+.prose ul > li::marker,
+.prose ol > li::marker,
+.payload-richtext ul > li::marker,
+.payload-richtext ol > li::marker {
+  color: inherit !important;
+}
+
 /* Arrow Button Shape */
 @layer components {
   .arrow-button-wrapper {

@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { FeaturePreviewBlock } from '@/blocks/FeaturePreview/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import { InfoCardsBlock } from '@/blocks/InfoCards/Component'
+import { TeamMembersBlock } from '@/blocks/TeamMembers/Component'
 import { AccordionInfoBlock } from '@/blocks/AccordionInfo/Component'
 
 const blockComponents = {
@@ -21,6 +22,7 @@ const blockComponents = {
   featurePreview: FeaturePreviewBlock,
   testimonials: TestimonialsBlock,
   infoCards: InfoCardsBlock,
+  teamMembers: TeamMembersBlock,
   accordionInfo: AccordionInfoBlock,
 }
 

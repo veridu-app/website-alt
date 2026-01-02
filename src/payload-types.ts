@@ -218,6 +218,7 @@ export interface Page {
     | FeaturePreviewBlock
     | TestimonialsBlock
     | InfoCardsBlock
+    | TeamMembersBlock
     | AccordionInfoBlock
   )[];
   meta?: {
@@ -1036,6 +1037,62 @@ export interface InfoCardsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamMembersBlock".
+ */
+export interface TeamMembersBlock {
+  people: {
+    /**
+     * Bild der Person
+     */
+    image: number | Media;
+    name: string;
+    /**
+     * Berufsbezeichnung oder Rolle
+     */
+    jobDescription: string;
+    /**
+     * Abschluss oder Qualifikation (z.B. B. Sc. Psychologie)
+     */
+    qualification?: string | null;
+    /**
+     * Optionale Beschreibung der Person
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * LinkedIn Profil URL (z.B. https://linkedin.com/in/username)
+     */
+    linkedInUrl?: string | null;
+    /**
+     * E-Mail-Adresse der Person
+     */
+    email?: string | null;
+    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    id?: string | null;
+  }[];
+  /**
+   * Number of cards displayed per row on large screens
+   */
+  cardsPerRow?: ('3' | '4') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamMembers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "AccordionInfoBlock".
  */
 export interface AccordionInfoBlock {
@@ -1441,6 +1498,7 @@ export interface PagesSelect<T extends boolean = true> {
         featurePreview?: T | FeaturePreviewBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         infoCards?: T | InfoCardsBlockSelect<T>;
+        teamMembers?: T | TeamMembersBlockSelect<T>;
         accordionInfo?: T | AccordionInfoBlockSelect<T>;
       };
   meta?:
@@ -1632,6 +1690,28 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
               appearance?: T;
               showArrow?: T;
             };
+        id?: T;
+      };
+  cardsPerRow?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamMembersBlock_select".
+ */
+export interface TeamMembersBlockSelect<T extends boolean = true> {
+  people?:
+    | T
+    | {
+        image?: T;
+        name?: T;
+        jobDescription?: T;
+        qualification?: T;
+        description?: T;
+        linkedInUrl?: T;
+        email?: T;
+        backgroundColor?: T;
         id?: T;
       };
   cardsPerRow?: T;
