@@ -51,11 +51,11 @@ export async function Footer() {
               )
             })}
 
-            {/* Kontakt-Bereich - Rechts ausgerichtet */}
+            {/* Kontakt-Bereich */}
             {hasContactInfo && (
-              <nav className="flex flex-col gap-3 md:items-end">
+              <nav className="flex flex-col gap-3">
                 <h3 className="font-semibold text-off-white mb-2">Kontakt</h3>
-                <div className="flex flex-col gap-3 md:items-end">
+                <div className="flex flex-col gap-3">
                   {contact?.email && (
                     <a
                       href={`mailto:${contact.email}`}

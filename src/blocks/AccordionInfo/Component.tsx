@@ -35,7 +35,7 @@ export const AccordionInfoBlock: React.FC<Props> = ({
     <div className={cn('container', textColorClass, className)}>
       {/* Title Section */}
       {hasRichTextContent(title) && (
-        <div className="mb-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+        <div className="mb-8 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
