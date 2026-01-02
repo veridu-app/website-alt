@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { backgroundColorClassMap } from '@/utilities/backgroundColor'
+import { backgroundColorClassMap } from '@/fields/appColor'
 
 type BackgroundColorProps = {
   color?: string | null

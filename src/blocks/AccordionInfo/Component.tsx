@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { CMSLink } from '@/components/Link'
+import { textColorClassMap } from '@/fields/appColor'
 
 type Props = {
   className?: string
@@ -21,13 +22,16 @@ export const AccordionInfoBlock: React.FC<Props> = ({
   accordionItems,
   showViewAllLink,
   link: viewAllLink,
+  foregroundColor,
 }) => {
   if (!accordionItems || accordionItems.length === 0) {
     return null
   }
 
+  const textColorClass = foregroundColor ? textColorClassMap[foregroundColor] : 'text-foreground'
+
   return (
-    <div className={cn('container', className)}>
+    <div className={cn('container', textColorClass, className)}>
       {/* Title Section */}
       {title && (
         <div className="mb-16 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">

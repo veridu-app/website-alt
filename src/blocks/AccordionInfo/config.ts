@@ -2,11 +2,20 @@ import type { Block } from 'payload'
 
 import { defaultLexical } from '@/fields/defaultLexical'
 import { link } from '@/fields/link'
+import { appColorField } from '@/fields/appColor'
 
 export const AccordionInfo: Block = {
   slug: 'accordionInfo',
   interfaceName: 'AccordionInfoBlock',
   fields: [
+    appColorField({
+      name: 'foregroundColor',
+      dbName: 'foreground_color',
+      admin: {
+        position: 'sidebar',
+        description: 'Color in which the accordion section should be displayed',
+      },
+    }),
     {
       name: 'title',
       type: 'richText',

@@ -4,7 +4,7 @@ import { cn } from '@/utilities/ui'
 import React from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
-import { backgroundColorClassMap } from '@/utilities/backgroundColor'
+import { backgroundColorClassMap } from '@/fields/appColor'
 
 type Props = {
   className?: string

@@ -1039,6 +1039,10 @@ export interface InfoCardsBlock {
  * via the `definition` "AccordionInfoBlock".
  */
 export interface AccordionInfoBlock {
+  /**
+   * Color in which the accordion section should be displayed
+   */
+  foregroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   title?: {
     root: {
       type: string;
@@ -1639,6 +1643,7 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
  * via the `definition` "AccordionInfoBlock_select".
  */
 export interface AccordionInfoBlockSelect<T extends boolean = true> {
+  foregroundColor?: T;
   title?: T;
   accordionItems?:
     | T

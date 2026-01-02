@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 
 import { defaultLexical } from '@/fields/defaultLexical'
-import { backgroundColorField, backgroundColorOptions } from '@/fields/backgroundColor'
+import { appColorField, appColorOptions } from '@/fields/appColor'
 import { link } from '@/fields/link'
 
 export const InfoCards: Block = {
@@ -40,7 +40,7 @@ export const InfoCards: Block = {
             description: 'Optional: Bild hochladen',
           },
         },
-        backgroundColorField(),
+        appColorField(),
         {
           name: 'catchInfo',
           type: 'group',
@@ -113,7 +113,7 @@ export const InfoCards: Block = {
                   type: 'select',
                   required: false,
                   label: 'Banner Farbe',
-                  options: backgroundColorOptions,
+                  options: appColorOptions,
                   dbName: 'banner_color',
                   admin: {
                     description: 'Farbe des Banners',

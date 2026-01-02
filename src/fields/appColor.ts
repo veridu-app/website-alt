@@ -1,6 +1,6 @@
 import type { Field } from 'payload'
 
-export type BackgroundColorValue =
+export type AppColorValue =
   | 'off-white'
   | 'frozen-green'
   | 'lavender'
@@ -8,7 +8,7 @@ export type BackgroundColorValue =
   | 'cerulean'
   | 'orange'
 
-export const backgroundColorOptions: Array<{ label: string; value: BackgroundColorValue }> = [
+export const appColorOptions: Array<{ label: string; value: AppColorValue }> = [
   {
     label: 'Off White',
     value: 'off-white',
@@ -35,7 +35,7 @@ export const backgroundColorOptions: Array<{ label: string; value: BackgroundCol
   },
 ]
 
-type BackgroundColorFieldOptions = {
+type AppColorFieldOptions = {
   name?: string
   required?: boolean
   dbName?: string
@@ -50,13 +50,13 @@ type BackgroundColorFieldOptions = {
  * @param options - Optional configuration for the field
  * @returns A Payload select field configuration for background colors
  */
-export const backgroundColorField = (options: BackgroundColorFieldOptions = {}): Field => {
+export const appColorField = (options: AppColorFieldOptions = {}): Field => {
   const { name = 'backgroundColor', required = false, dbName, admin = {} } = options
 
   return {
     name,
     type: 'select',
-    options: backgroundColorOptions,
+    options: appColorOptions,
     required,
     ...(dbName && { dbName }),
     admin: {
@@ -71,7 +71,7 @@ export const backgroundColorField = (options: BackgroundColorFieldOptions = {}):
  * @returns Tailwind CSS text color class
  */
 export const getTextColorForBackground = (
-  backgroundColor?: BackgroundColorValue | string | null,
+  backgroundColor?: AppColorValue | string | null,
 ): string => {
   if (!backgroundColor) return 'text-accent-foreground'
 
@@ -95,4 +95,30 @@ export const getTextColorForBackground = (
   }
 
   return 'text-foreground'
+}
+
+/**
+ * Color class mapping for background colors
+ * Maps color names (as used in CMS) to Tailwind CSS background classes
+ */
+export const backgroundColorClassMap: Record<string, string> = {
+  'off-white': 'bg-off-white',
+  'frozen-green': 'bg-frozen-green',
+  lavender: 'bg-lavender',
+  'dark-teal': 'bg-dark-teal',
+  cerulean: 'bg-cerulean',
+  orange: 'bg-orange',
+}
+
+/**
+ * Color class mapping for text colors
+ * Maps color names (as used in CMS) to Tailwind CSS text classes
+ */
+export const textColorClassMap: Record<string, string> = {
+  'off-white': 'text-off-white',
+  'frozen-green': 'text-frozen-green',
+  lavender: 'text-lavender',
+  'dark-teal': 'text-dark-teal',
+  cerulean: 'text-cerulean',
+  orange: 'text-orange',
 }

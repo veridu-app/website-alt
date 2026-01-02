@@ -7,7 +7,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { backgroundColorField } from '@/fields/backgroundColor'
+import { appColorField } from '@/fields/appColor'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { TextColorFeature, TextFontFamilyFeature } from 'payload-lexical-typography'
 
@@ -86,7 +86,7 @@ export const FeaturePreview: Block = {
           ],
           required: true,
         },
-        backgroundColorField({
+        appColorField({
           dbName: 'bg_color',
         }),
       ],

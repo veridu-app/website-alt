@@ -18,14 +18,13 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
   const [scrollPosition, setScrollPosition] = useState(0)
   const [maxScroll, setMaxScroll] = useState(0)
 
-  const [cardWidth, setCardWidth] = useState(400)
+  const cardWidth = 400
   const [gap, setGap] = useState(24)
   const scrollAmount = cardWidth + gap
 
   useEffect(() => {
     const updateDimensions = () => {
       if (typeof window !== 'undefined') {
-        setCardWidth(window.innerWidth >= 1024 ? 500 : 400)
         setGap(window.innerWidth >= 1024 ? 32 : 24)
       }
     }
@@ -150,11 +149,11 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id || index}
-                className="rounded-lg overflow-hidden p-8 cut-all-corners bg-card flex flex-col gap-6 w-[400px] lg:w-[500px] flex-shrink-0 snap-start"
+                className="rounded-lg overflow-hidden p-8 cut-all-corners bg-card flex flex-col gap-6 w-[400px] flex-shrink-0 snap-start"
               >
                 {/* Quote Section */}
                 {testimonial.quote && (
-                  <blockquote className="text-lg lg:text-xl font-medium italic flex-1">
+                  <blockquote className="md:text-md lg:text-lg font-medium italic flex-1">
                     &ldquo;{testimonial.quote}&rdquo;
                   </blockquote>
                 )}
@@ -162,12 +161,12 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
                 {/* Name, School and Image Section */}
                 <div className="flex items-center gap-4">
                   {testimonial.image && typeof testimonial.image === 'object' && (
-                    <div className="relative w-24 h-24 flex-shrink-0 rounded-full overflow-hidden">
+                    <div className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden">
                       <Media
                         resource={testimonial.image}
                         fill
                         imgClassName="object-cover"
-                        size="96px"
+                        size="80px"
                       />
                     </div>
                   )}
