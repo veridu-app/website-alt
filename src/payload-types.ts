@@ -2370,30 +2370,53 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
+  linkCategories?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Display an arrow icon before the link text.
-           */
-          showArrow?: boolean | null;
-        };
+        /**
+         * Überschrift für diese Link-Kategorie
+         */
+        heading: string;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Display an arrow icon before the link text.
+                 */
+                showArrow?: boolean | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
+  contact?: {
+    /**
+     * Kontakt-E-Mail-Adresse
+     */
+    email?: string | null;
+    /**
+     * LinkedIn Profil URL (z.B. https://linkedin.com/company/veridu)
+     */
+    linkedIn?: string | null;
+    /**
+     * Instagram Profil URL (z.B. https://instagram.com/veridu)
+     */
+    instagram?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2426,20 +2449,33 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  linkCategories?:
     | T
     | {
-        link?:
+        heading?: T;
+        links?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              showArrow?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    showArrow?: T;
+                  };
+              id?: T;
             };
         id?: T;
+      };
+  contact?:
+    | T
+    | {
+        email?: T;
+        linkedIn?: T;
+        instagram?: T;
       };
   updatedAt?: T;
   createdAt?: T;
