@@ -10,7 +10,7 @@ import RichText from '@/components/RichText'
 export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   return (
     <div className="container">
-      <div className="flex flex-col lg:flex-row md:gap-12 lg:gap-14 xl:gap-16 px-4">
+      <div className="flex flex-col lg:flex-row md:gap-12 lg:gap-14 xl:gap-16 px-4 pb-16">
         <div className="lg:w-2/3 mb-8 lg:mb-0 relative lg:flex lg:items-center">
           <div
             className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center"

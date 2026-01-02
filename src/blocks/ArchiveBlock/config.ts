@@ -8,11 +8,18 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { appColorField } from '@/fields/appColor'
 
 export const Archive: Block = {
   slug: 'archive',
   interfaceName: 'ArchiveBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'introContent',
       type: 'richText',

@@ -7,10 +7,18 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+import { appColorField } from '@/fields/appColor'
+
 export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'form',
       type: 'relationship',

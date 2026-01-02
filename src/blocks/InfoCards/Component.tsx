@@ -8,6 +8,7 @@ import { backgroundColorClassMap } from '@/fields/appColor'
 import { getTextColorForBackground } from '@/fields/appColor'
 import Link from 'next/link'
 import { CMSLink } from '@/components/Link'
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 type Props = {
   className?: string
@@ -34,8 +35,8 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
   return (
     <div className={cn('container overflow-visible', className)}>
       {/* Title Section */}
-      {title && (
-        <div className="mb-8 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+      {hasRichTextContent(title) && (
+        <div className="mb-8 text-center lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
@@ -79,13 +80,13 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
           'grid',
           gridColsClass,
           gridGapClass,
-          'overflow-visible pb-12',
+          'overflow-visible',
           shouldCenter && `mx-auto info-cards-grid-centered-${totalCards}`,
         )}
       >
         {infoCards.map((infoCard, index) => {
-          const bgClass = infoCard.backgroundColor
-            ? backgroundColorClassMap[infoCard.backgroundColor]
+          const bgClass = infoCard.elementColor
+            ? backgroundColorClassMap[infoCard.elementColor]
             : 'bg-card'
 
           return (

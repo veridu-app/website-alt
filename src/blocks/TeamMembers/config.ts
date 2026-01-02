@@ -7,6 +7,12 @@ export const TeamMembers: Block = {
   slug: 'teamMembers',
   interfaceName: 'TeamMembersBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'people',
       type: 'array',
@@ -78,7 +84,9 @@ export const TeamMembers: Block = {
             description: 'E-Mail-Adresse der Person',
           },
         },
-        appColorField(),
+        appColorField({
+          name: 'elementColor',
+        }),
       ],
     },
     {

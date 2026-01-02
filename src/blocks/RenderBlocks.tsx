@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
+import { backgroundColorClassMap, getTextColorForBackground } from '@/fields/appColor'
+import { cn } from '@/utilities/ui'
 
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -39,14 +41,21 @@ export const RenderBlocks: React.FC<{
     return (
       <Fragment>
         {blocks.map((block, index) => {
-          const { blockType } = block
+          const { blockType, backgroundColor } = block as Page['layout'][0] & {
+            backgroundColor?: string
+          }
 
           if (blockType && blockType in blockComponents) {
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const bgClass = backgroundColor ? backgroundColorClassMap[backgroundColor] : undefined
+              const textClass = backgroundColor
+                ? getTextColorForBackground(backgroundColor)
+                : undefined
+
               return (
-                <div className="my-16" key={index}>
+                <div key={index} className={cn('py-16', bgClass, textClass)}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

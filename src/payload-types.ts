@@ -467,6 +467,10 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   richText?: {
     root: {
       type: string;
@@ -525,6 +529,10 @@ export interface CallToActionBlock {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -584,6 +592,10 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   media: number | Media;
   id?: string | null;
   blockName?: string | null;
@@ -594,6 +606,10 @@ export interface MediaBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   introContent?: {
     root: {
       type: string;
@@ -652,6 +668,10 @@ export interface ArchiveBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
@@ -852,6 +872,10 @@ export interface Form {
  * via the `definition` "FeaturePreviewBlock".
  */
 export interface FeaturePreviewBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   title?: {
     root: {
       type: string;
@@ -885,7 +909,7 @@ export interface FeaturePreviewBlock {
       [k: string]: unknown;
     };
     position: 'left' | 'right';
-    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    elementColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -897,6 +921,10 @@ export interface FeaturePreviewBlock {
  * via the `definition` "TestimonialsBlock".
  */
 export interface TestimonialsBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   title?: {
     root: {
       type: string;
@@ -934,6 +962,10 @@ export interface TestimonialsBlock {
  * via the `definition` "InfoCardsBlock".
  */
 export interface InfoCardsBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   title?: {
     root: {
       type: string;
@@ -969,7 +1001,7 @@ export interface InfoCardsBlock {
      * Optional: Bild hochladen
      */
     image?: (number | null) | Media;
-    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    elementColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
     /**
      * Auffällige Statistik für den Badge (z.B. "30%" links, "aller Lehrkräfte leiden unter psychischen Belastungen" rechts)
      */
@@ -1050,6 +1082,10 @@ export interface InfoCardsBlock {
  * via the `definition` "TeamMembersBlock".
  */
 export interface TeamMembersBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   people: {
     /**
      * Bild der Person
@@ -1090,7 +1126,7 @@ export interface TeamMembersBlock {
      * E-Mail-Adresse der Person
      */
     email?: string | null;
-    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    elementColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
     id?: string | null;
   }[];
   /**
@@ -1106,6 +1142,10 @@ export interface TeamMembersBlock {
  * via the `definition` "AccordionInfoBlock".
  */
 export interface AccordionInfoBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   /**
    * Color in which the accordion section should be displayed
    */
@@ -1201,6 +1241,10 @@ export interface AccordionInfoBlock {
  * via the `definition` "StepsBlock".
  */
 export interface StepsBlock {
+  /**
+   * Hintergrundfarbe für den gesamten Block-Bereich
+   */
+  backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   title?: {
     root: {
       type: string;
@@ -1232,7 +1276,7 @@ export interface StepsBlock {
       };
       [k: string]: unknown;
     };
-    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    elementColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -1575,6 +1619,7 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   richText?: T;
   cardColor?: T;
   links?:
@@ -1601,6 +1646,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   columns?:
     | T
     | {
@@ -1631,6 +1677,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   media?: T;
   id?: T;
   blockName?: T;
@@ -1640,6 +1687,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
  * via the `definition` "ArchiveBlock_select".
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   introContent?: T;
   populateBy?: T;
   relationTo?: T;
@@ -1666,6 +1714,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   form?: T;
   enableIntro?: T;
   introContent?: T;
@@ -1677,6 +1726,7 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "FeaturePreviewBlock_select".
  */
 export interface FeaturePreviewBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   title?: T;
   featurePreviews?:
     | T
@@ -1684,7 +1734,7 @@ export interface FeaturePreviewBlockSelect<T extends boolean = true> {
         media?: T;
         description?: T;
         position?: T;
-        backgroundColor?: T;
+        elementColor?: T;
         id?: T;
       };
   id?: T;
@@ -1695,6 +1745,7 @@ export interface FeaturePreviewBlockSelect<T extends boolean = true> {
  * via the `definition` "TestimonialsBlock_select".
  */
 export interface TestimonialsBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   title?: T;
   testimonials?:
     | T
@@ -1713,13 +1764,14 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
  * via the `definition` "InfoCardsBlock_select".
  */
 export interface InfoCardsBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   title?: T;
   infoCards?:
     | T
     | {
         text?: T;
         image?: T;
-        backgroundColor?: T;
+        elementColor?: T;
         catchInfo?:
           | T
           | {
@@ -1759,6 +1811,7 @@ export interface InfoCardsBlockSelect<T extends boolean = true> {
  * via the `definition` "TeamMembersBlock_select".
  */
 export interface TeamMembersBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   people?:
     | T
     | {
@@ -1769,7 +1822,7 @@ export interface TeamMembersBlockSelect<T extends boolean = true> {
         description?: T;
         linkedInUrl?: T;
         email?: T;
-        backgroundColor?: T;
+        elementColor?: T;
         id?: T;
       };
   cardsPerRow?: T;
@@ -1781,6 +1834,7 @@ export interface TeamMembersBlockSelect<T extends boolean = true> {
  * via the `definition` "AccordionInfoBlock_select".
  */
 export interface AccordionInfoBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   foregroundColor?: T;
   title?: T;
   accordionItems?:
@@ -1822,12 +1876,13 @@ export interface AccordionInfoBlockSelect<T extends boolean = true> {
  * via the `definition` "StepsBlock_select".
  */
 export interface StepsBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
   title?: T;
   steps?:
     | T
     | {
         content?: T;
-        backgroundColor?: T;
+        elementColor?: T;
         id?: T;
       };
   id?: T;

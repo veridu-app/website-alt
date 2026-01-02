@@ -1,11 +1,18 @@
 import type { Block } from 'payload'
 
 import { defaultLexical } from '@/fields/defaultLexical'
+import { appColorField } from '@/fields/appColor'
 
 export const Testimonials: Block = {
   slug: 'testimonials',
   interfaceName: 'TestimonialsBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'title',
       type: 'richText',

@@ -92,8 +92,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     return 'dark-teal'
   }, [textColorClass])
 
+  const isTransitionComplete = useMemo(() => {
+    return scrollProgress >= 1
+  }, [scrollProgress])
+
   return (
-    <header className={`sticky top-0 z-50 ${pageBackground} transition-all duration-150`}>
+    <header
+      className={`sticky top-0 z-50 ${pageBackground} transition-all duration-150 ${
+        isTransitionComplete ? 'shadow-md' : ''
+      }`}
+    >
       {/* Off-white overlay that fades in on scroll */}
       <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-150"

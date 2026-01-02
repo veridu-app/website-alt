@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/accordion'
 import { CMSLink } from '@/components/Link'
 import { textColorClassMap } from '@/fields/appColor'
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 type Props = {
   className?: string
@@ -33,8 +34,8 @@ export const AccordionInfoBlock: React.FC<Props> = ({
   return (
     <div className={cn('container', textColorClass, className)}>
       {/* Title Section */}
-      {title && (
-        <div className="mb-16 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+      {hasRichTextContent(title) && (
+        <div className="mb-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}

@@ -7,6 +7,12 @@ export const Steps: Block = {
   slug: 'steps',
   interfaceName: 'StepsBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'title',
       type: 'richText',
@@ -29,7 +35,9 @@ export const Steps: Block = {
           required: true,
           label: 'Content',
         },
-        appColorField(),
+        appColorField({
+          name: 'elementColor',
+        }),
       ],
     },
   ],

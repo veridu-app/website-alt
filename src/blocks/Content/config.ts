@@ -11,7 +11,7 @@ import {
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { appColorOptions } from '@/fields/appColor'
+import { appColorOptions, appColorField } from '@/fields/appColor'
 import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
@@ -109,6 +109,12 @@ export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'columns',
       type: 'array',

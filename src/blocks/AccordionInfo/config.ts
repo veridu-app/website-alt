@@ -9,6 +9,12 @@ export const AccordionInfo: Block = {
   interfaceName: 'AccordionInfoBlock',
   fields: [
     appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
+    appColorField({
       name: 'foregroundColor',
       dbName: 'foreground_color',
       admin: {

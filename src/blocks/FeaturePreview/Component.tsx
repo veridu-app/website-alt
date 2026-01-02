@@ -5,6 +5,7 @@ import React from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { backgroundColorClassMap } from '@/fields/appColor'
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 type Props = {
   className?: string
@@ -18,17 +19,22 @@ export const FeaturePreviewBlock: React.FC<Props> = ({ className, title, feature
   return (
     <div className={cn('container', className)}>
       {/* Title Section */}
-      {title && (
-        <div className="mb-16 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
-          <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
+      {hasRichTextContent(title) && (
+        <div className="mb-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+          <RichText
+            data={title}
+            enableGutter={false}
+            enableProse={true}
+            className="max-w-none"
+          />
         </div>
       )}
 
       {/* Feature Previews List */}
       <div className="flex flex-col gap-24">
         {featurePreviews.map((featurePreview, index) => {
-          const { media, description, position = 'left', backgroundColor } = featurePreview
-          const bgClass = backgroundColor ? backgroundColorClassMap[backgroundColor] : 'bg-card'
+          const { media, description, position = 'left', elementColor } = featurePreview
+          const bgClass = elementColor ? backgroundColorClassMap[elementColor] : 'bg-card'
 
           return (
             <div

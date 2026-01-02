@@ -5,6 +5,7 @@ import React from 'react'
 import RichText from '@/components/RichText'
 import { backgroundColorClassMap } from '@/fields/appColor'
 import { getTextColorForBackground } from '@/fields/appColor'
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 type Props = {
   className?: string
@@ -18,8 +19,8 @@ export const StepsBlock: React.FC<Props> = ({ className, title, steps }) => {
   return (
     <div className={cn('container overflow-visible', className)}>
       {/* Title Section */}
-      {title && (
-        <div className="mb-12 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+      {hasRichTextContent(title) && (
+        <div className="mb-12 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
@@ -28,9 +29,7 @@ export const StepsBlock: React.FC<Props> = ({ className, title, steps }) => {
       <div className="flex flex-col gap-10 pb-12">
         {steps.map((step, index) => {
           const stepNumber = index + 1
-          const bgClass = step.backgroundColor
-            ? backgroundColorClassMap[step.backgroundColor]
-            : 'bg-card'
+          const bgClass = step.elementColor ? backgroundColorClassMap[step.elementColor] : 'bg-card'
 
           return (
             <div key={step.id || index} className="flex items-start gap-4 sm:gap-6">
@@ -40,11 +39,7 @@ export const StepsBlock: React.FC<Props> = ({ className, title, steps }) => {
               </div>
 
               {/* Content Card - Right */}
-              <div
-                className={cn(
-                  'flex-1 rounded-lg overflow-hidden flex flex-col gap-4',
-                )}
-              >
+              <div className={cn('flex-1 rounded-lg overflow-hidden flex flex-col gap-4')}>
                 {/* Content Section */}
                 {step.content && (
                   <div className="flex-1">

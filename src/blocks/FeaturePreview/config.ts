@@ -15,6 +15,12 @@ export const FeaturePreview: Block = {
   slug: 'featurePreview',
   interfaceName: 'FeaturePreviewBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'title',
       type: 'richText',
@@ -87,7 +93,8 @@ export const FeaturePreview: Block = {
           required: true,
         },
         appColorField({
-          dbName: 'bg_color',
+          name: 'elementColor',
+          dbName: 'element_color',
         }),
       ],
     },

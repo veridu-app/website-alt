@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 type Props = {
   className?: string
@@ -89,8 +90,8 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
   return (
     <div className={cn(className)}>
       {/* Title Section */}
-      {title && (
-        <div className="mb-4 pt-16 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
+      {hasRichTextContent(title) && (
+        <div className="mb-4 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
@@ -128,7 +129,7 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
         {/* Scrollable Container */}
         <div
           ref={scrollContainerRef}
-          className="overflow-x-auto pb-4 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          className="overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           role="region"
           aria-label="Testimonials carousel"
           tabIndex={0}
@@ -145,7 +146,7 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
             }
           }}
         >
-          <div className="flex gap-6 lg:gap-8 [&>*]:flex-shrink-0 w-fit mx-auto p-8">
+          <div className="flex gap-6 lg:gap-8 [&>*]:flex-shrink-0 w-fit mx-auto px-8">
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id || index}

@@ -78,11 +78,11 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
         )}
       >
         {people.map((person, index) => {
-          const bgClass = person.backgroundColor
-            ? backgroundColorClassMap[person.backgroundColor]
+          const bgClass = person.elementColor
+            ? backgroundColorClassMap[person.elementColor]
             : 'bg-card'
-          const textClass = person.backgroundColor
-            ? getTextColorForBackground(person.backgroundColor)
+          const textClass = person.elementColor
+            ? getTextColorForBackground(person.elementColor)
             : 'text-foreground'
 
           return (

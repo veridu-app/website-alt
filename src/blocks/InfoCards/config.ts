@@ -8,6 +8,12 @@ export const InfoCards: Block = {
   slug: 'infoCards',
   interfaceName: 'InfoCardsBlock',
   fields: [
+    appColorField({
+      admin: {
+        position: 'sidebar',
+        description: 'Hintergrundfarbe für den gesamten Block-Bereich',
+      },
+    }),
     {
       name: 'title',
       type: 'richText',
@@ -40,7 +46,9 @@ export const InfoCards: Block = {
             description: 'Optional: Bild hochladen',
           },
         },
-        appColorField(),
+        appColorField({
+          name: 'elementColor',
+        }),
         {
           name: 'catchInfo',
           type: 'group',
