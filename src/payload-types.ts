@@ -220,6 +220,7 @@ export interface Page {
     | InfoCardsBlock
     | TeamMembersBlock
     | AccordionInfoBlock
+    | StepsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -481,6 +482,10 @@ export interface CallToActionBlock {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Background color for the card
+   */
+  cardColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
   links?:
     | {
         link: {
@@ -500,7 +505,9 @@ export interface CallToActionBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: 'default' | null;
+          appearance?:
+            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+            | null;
           /**
            * Display an arrow icon before the link text.
            */
@@ -1191,6 +1198,49 @@ export interface AccordionInfoBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  title?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  steps: {
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    backgroundColor?: ('off-white' | 'frozen-green' | 'lavender' | 'dark-teal' | 'cerulean' | 'orange') | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1503,6 +1553,7 @@ export interface PagesSelect<T extends boolean = true> {
         infoCards?: T | InfoCardsBlockSelect<T>;
         teamMembers?: T | TeamMembersBlockSelect<T>;
         accordionInfo?: T | AccordionInfoBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1525,6 +1576,7 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
   richText?: T;
+  cardColor?: T;
   links?:
     | T
     | {
@@ -1761,6 +1813,22 @@ export interface AccordionInfoBlockSelect<T extends boolean = true> {
         label?: T;
         appearance?: T;
         showArrow?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  title?: T;
+  steps?:
+    | T
+    | {
+        content?: T;
+        backgroundColor?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;

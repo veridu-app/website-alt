@@ -128,6 +128,13 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
                   </div>
                 )}
 
+                {/* Button Section */}
+                {infoCard.showButton && infoCard.link && (
+                  <div className="mt-auto">
+                    <CMSLink {...infoCard.link} />
+                  </div>
+                )}
+
                 {/* Catch Info Section (between texts) */}
                 {infoCard.catchInfo &&
                   infoCard.catchInfo.enabled &&
@@ -178,13 +185,6 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
                         return <p key={idx}>{footnoteContent}</p>
                       })}
                     </div>
-                  </div>
-                )}
-
-                {/* Button Section */}
-                {infoCard.showButton && infoCard.link && (
-                  <div className="mt-auto pt-4">
-                    <CMSLink {...infoCard.link} />
                   </div>
                 )}
               </div>

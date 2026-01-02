@@ -12,6 +12,7 @@ import { Testimonials } from '../../blocks/Testimonials/config'
 import { InfoCards } from '../../blocks/InfoCards/config'
 import { TeamMembers } from '../../blocks/TeamMembers/config'
 import { AccordionInfo } from '../../blocks/AccordionInfo/config'
+import { Steps } from '../../blocks/Steps/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { appColorField } from '@/fields/appColor'
@@ -89,6 +90,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 InfoCards,
                 TeamMembers,
                 AccordionInfo,
+                Steps,
               ],
               required: true,
               admin: {

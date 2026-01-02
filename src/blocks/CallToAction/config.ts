@@ -7,6 +7,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+import { appColorField } from '@/fields/appColor'
 import { linkGroup } from '../../fields/linkGroup'
 
 export const CallToAction: Block = {
@@ -28,8 +29,13 @@ export const CallToAction: Block = {
       }),
       label: false,
     },
+    appColorField({
+      name: 'cardColor',
+      admin: {
+        description: 'Background color for the card',
+      },
+    }),
     linkGroup({
-      appearances: ['default'],
       overrides: {
         maxRows: 2,
       },

@@ -12,6 +12,7 @@ import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import { InfoCardsBlock } from '@/blocks/InfoCards/Component'
 import { TeamMembersBlock } from '@/blocks/TeamMembers/Component'
 import { AccordionInfoBlock } from '@/blocks/AccordionInfo/Component'
+import { StepsBlock } from '@/blocks/Steps/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,6 +25,7 @@ const blockComponents = {
   infoCards: InfoCardsBlock,
   teamMembers: TeamMembersBlock,
   accordionInfo: AccordionInfoBlock,
+  steps: StepsBlock,
 }
 
 export const RenderBlocks: React.FC<{

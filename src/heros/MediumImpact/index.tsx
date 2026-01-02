@@ -16,14 +16,14 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
             className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center"
             style={{ zIndex: -1 }}
           >
-            <VeriduSymbol strokeWidth='1px' />
+            <VeriduSymbol strokeWidth="1px" />
           </div>
 
           <div className="relative z-10 text-center text-center">
             {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
 
             {Array.isArray(links) && links.length > 0 && (
-              <ul className="flex gap-4 justify-center">
+              <ul className="flex flex-wrap gap-4 justify-center">
                 {links.map(({ link }, i) => {
                   return (
                     <li key={i}>
