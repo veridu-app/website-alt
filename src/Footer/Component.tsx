@@ -97,7 +97,7 @@ export async function Footer() {
         </div>
 
         {/* Copyright - Ganz unten, rechts ausgerichtet */}
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-4">
           <p className="text-sm text-off-white/60">© veridu UG (haftungsbeschränkt)</p>
         </div>
       </div>

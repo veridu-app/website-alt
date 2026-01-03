@@ -1,7 +1,8 @@
+'use client'
 import type { InfoCardsBlock as InfoCardsBlockProps } from '@/payload-types'
 
 import { cn } from '@/utilities/ui'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { backgroundColorClassMap } from '@/fields/appColor'
@@ -15,6 +16,58 @@ type Props = {
 } & InfoCardsBlockProps
 
 export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, cardsPerRow }) => {
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const [isTitleVisible, setIsTitleVisible] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Title observer
+    if (titleRef.current) {
+      const titleObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsTitleVisible(true)
+          }
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+      )
+
+      titleObserver.observe(titleRef.current)
+
+      return () => {
+        titleObserver.disconnect()
+      }
+    }
+  }, [title])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-card-index') || '0', 10)
+            setVisibleCards((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      },
+    )
+
+    const cards = containerRef.current.querySelectorAll('[data-card-index]')
+    cards.forEach((card) => observer.observe(card))
+
+    return () => {
+      cards.forEach((card) => observer.unobserve(card))
+      observer.disconnect()
+    }
+  }, [infoCards])
+
   if (!infoCards || infoCards.length === 0) {
     return null
   }
@@ -33,10 +86,17 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
   const gridGapClass = cardsPerRowValue === '4' ? 'gap-3 sm:gap-4' : 'gap-5 sm:gap-8'
 
   return (
-    <div className={cn('container overflow-visible', className)}>
+    <div ref={containerRef} className={cn('container overflow-visible', className)}>
       {/* Title Section */}
       {hasRichTextContent(title) && (
-        <div className="mb-8 text-center lg:px-16 max-w-[60rem] justify-center mx-auto">
+        <div
+          ref={titleRef}
+          className={cn(
+            'mb-8 text-center lg:px-16 max-w-[60rem] justify-center mx-auto',
+            'transition-all duration-700 ease-out',
+            isTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+          )}
+        >
           <RichText data={title} enableGutter={false} enableProse={true} className="max-w-none" />
         </div>
       )}
@@ -89,16 +149,28 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
             ? backgroundColorClassMap[infoCard.elementColor]
             : 'bg-card'
 
+          const isVisible = visibleCards.has(index)
+
           return (
             <div
               key={infoCard.id || index}
-              className="overflow-visible relative h-full flex flex-col"
+              data-card-index={index}
+              className={cn(
+                'overflow-visible relative h-full flex flex-col',
+                'transition-all duration-700 ease-out',
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+              )}
+              style={{
+                transitionDelay: `${index * 100}ms`,
+              }}
             >
               <div
                 className={cn(
                   'rounded-lg overflow-hidden button-cut-corners flex flex-col gap-6 relative flex-1',
                   cardPaddingClass,
                   bgClass,
+                  'transition-all duration-300 ease-out',
+                  'hover:scale-[1.02]',
                   infoCard.catchInfo &&
                     infoCard.catchInfo.enabled &&
                     infoCard.catchInfo.text &&
@@ -144,6 +216,8 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
                     <div
                       className={cn(
                         'rounded-xl p-4 flex flex-row items-center gap-3',
+                        'transition-all duration-300 ease-out',
+                        'hover:scale-[1.02]',
                         infoCard.catchInfo.bannerColor
                           ? backgroundColorClassMap[infoCard.catchInfo.bannerColor]
                           : 'bg-accent',
@@ -177,7 +251,11 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
 
                         if (footnote.url) {
                           return (
-                            <Link key={idx} href={footnote.url} className="hover:underline block">
+                            <Link
+                              key={idx}
+                              href={footnote.url}
+                              className="hover:underline block transition-colors duration-200"
+                            >
                               {footnoteContent}
                             </Link>
                           )
@@ -197,11 +275,16 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
                   <div
                     className={cn(
                       'absolute -bottom-10 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-4rem)] max-w-sm rounded-xl p-4 flex flex-row items-center gap-3 shadow-lg',
+                      'transition-all duration-500 ease-out',
+                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
                       infoCard.catchInfo.bannerColor
                         ? backgroundColorClassMap[infoCard.catchInfo.bannerColor]
                         : 'bg-accent',
                       getTextColorForBackground(infoCard.catchInfo.bannerColor),
                     )}
+                    style={{
+                      transitionDelay: `${index * 100 + 300}ms`,
+                    }}
                   >
                     {infoCard.catchInfo.value && (
                       <span className="text-2xl lg:text-3xl font-bold flex-shrink-0 leading-none">

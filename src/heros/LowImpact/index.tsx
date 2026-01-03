@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useRef, useState } from 'react'
 
 import type { Page } from '@/payload-types'
 
@@ -15,10 +16,42 @@ type LowImpactHeroType =
     })
 
 export const LowImpactHero: React.FC<LowImpactHeroType> = ({ children, richText }) => {
+  const [isVisible, setIsVisible] = useState(false)
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Intersection Observer für Fade-in beim Erscheinen im Viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current)
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current)
+      }
+    }
+  }, [])
+
   return (
-    <div className="container">
+    <div className="container" ref={heroRef}>
       <div className="px-8">
-        {children || (richText && <RichText data={richText} enableGutter={false} />)}
+        <div
+          className={`transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+          style={{ transitionDelay: '100ms' }}
+        >
+          {children || (richText && <RichText data={richText} enableGutter={false} />)}
+        </div>
       </div>
     </div>
   )

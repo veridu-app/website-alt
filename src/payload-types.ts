@@ -197,7 +197,7 @@ export interface Page {
              * Choose how the link should be rendered.
              */
             appearance?:
-              | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+              | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
               | null;
             /**
              * Display an arrow icon before the link text.
@@ -510,7 +510,7 @@ export interface CallToActionBlock {
            * Choose how the link should be rendered.
            */
           appearance?:
-            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
             | null;
           /**
            * Display an arrow icon before the link text.
@@ -573,7 +573,7 @@ export interface ContentBlock {
            * Choose how the link should be rendered.
            */
           appearance?:
-            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton')
+            | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
             | null;
           /**
            * Display an arrow icon before the link text.
@@ -653,7 +653,9 @@ export interface ArchiveBlock {
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+    appearance?:
+      | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
+      | null;
     /**
      * Display an arrow icon before the link text.
      */
@@ -1061,7 +1063,9 @@ export interface InfoCardsBlock {
       /**
        * Choose how the link should be rendered.
        */
-      appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+      appearance?:
+        | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
+        | null;
       /**
        * Display an arrow icon before the link text.
        */
@@ -1200,7 +1204,9 @@ export interface AccordionInfoBlock {
       /**
        * Choose how the link should be rendered.
        */
-      appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+      appearance?:
+        | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
+        | null;
       /**
        * Display an arrow icon before the link text.
        */
@@ -1226,7 +1232,9 @@ export interface AccordionInfoBlock {
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'textbutton') | null;
+    appearance?:
+      | ('default' | 'accent' | 'accent-dark' | 'secondary' | 'lavender' | 'light' | 'dark-teal' | 'textbutton')
+      | null;
     /**
      * Display an arrow icon before the link text.
      */

@@ -1,7 +1,8 @@
+'use client'
 import type { TeamMembersBlock as TeamMembersBlockProps } from '@/payload-types'
 
 import { cn } from '@/utilities/ui'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { Mail, Linkedin } from 'lucide-react'
@@ -12,6 +13,36 @@ type Props = {
 } & TeamMembersBlockProps
 
 export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerRow }) => {
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-card-index') || '0', 10)
+            setVisibleCards((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      },
+    )
+
+    const cardElements = containerRef.current.querySelectorAll('[data-card-index]')
+    cardElements.forEach((element) => observer.observe(element))
+
+    return () => {
+      cardElements.forEach((element) => observer.unobserve(element))
+      observer.disconnect()
+    }
+  }, [people])
+
   if (!people || people.length === 0) {
     return null
   }
@@ -33,7 +64,7 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
   const descriptionTextClass = cardsPerRowValue === '4' ? 'text-sm' : ''
 
   return (
-    <div className={cn('container overflow-visible', className)}>
+    <div className={cn('container overflow-visible', className)} ref={containerRef}>
       {/* Team Members Grid */}
       {shouldCenter && (
         <style
@@ -85,10 +116,20 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
             ? getTextColorForBackground(person.elementColor)
             : 'text-foreground'
 
+          const isVisible = visibleCards.has(index)
+
           return (
             <div
               key={person.id || index}
-              className="overflow-visible relative h-full flex flex-col"
+              data-card-index={index}
+              className={cn(
+                'overflow-visible relative h-full flex flex-col',
+                'transition-all duration-700 ease-out',
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+              )}
+              style={{
+                transitionDelay: `${index * 100}ms`,
+              }}
             >
               <div
                 className={cn(
@@ -96,6 +137,8 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
                   cardPaddingClass,
                   bgClass,
                   textClass,
+                  'transition-all duration-300 ease-out',
+                  'hover:scale-[1.02]',
                 )}
               >
                 {/* Image Section */}
@@ -141,7 +184,7 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
                         href={person.linkedInUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition-colors"
+                        className="transition-all duration-300 ease-out hover:scale-110 hover:opacity-80"
                         aria-label={`LinkedIn Profil von ${person.name || 'Person'}`}
                       >
                         <Linkedin className="w-5 h-5" />
@@ -150,7 +193,7 @@ export const TeamMembersBlock: React.FC<Props> = ({ className, people, cardsPerR
                     {person.email && (
                       <a
                         href={`mailto:${person.email}`}
-                        className="transition-colors"
+                        className="transition-all duration-300 ease-out hover:scale-110 hover:opacity-80"
                         aria-label={`E-Mail an ${person.name || 'Person'}`}
                       >
                         <Mail className="w-5 h-5" />

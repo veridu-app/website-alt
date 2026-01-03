@@ -1,5 +1,6 @@
+'use client'
 import { cn } from '@/utilities/ui'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@/components/RichText'
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
@@ -9,6 +10,35 @@ import { CMSLink } from '../../components/Link'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const { columns } = props
+  const [visibleColumns, setVisibleColumns] = useState<Set<number>>(new Set())
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-column-index') || '0', 10)
+            setVisibleColumns((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      },
+    )
+
+    const columnElements = containerRef.current.querySelectorAll('[data-column-index]')
+    columnElements.forEach((element) => observer.observe(element))
+
+    return () => {
+      columnElements.forEach((element) => observer.unobserve(element))
+      observer.disconnect()
+    }
+  }, [columns])
 
   const colsSpanClasses = {
     full: '12',
@@ -18,7 +48,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="container" ref={containerRef}>
       <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&
           columns.length > 0 &&
@@ -35,6 +65,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             const colSpan = colsSpanClasses[size!]
             const boxBgClass = enableBox && boxColor ? backgroundColorClassMap[boxColor] : undefined
+            const isVisible = visibleColumns.has(index)
 
             const content = (
               <>
@@ -73,6 +104,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             return (
               <div
+                data-column-index={index}
                 className={cn(
                   `col-span-4 lg:col-span-${colSpan}`,
                   {
@@ -82,11 +114,26 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   {
                     'h-full': enableBox,
                   },
+                  // Animation classes
+                  'transition-all duration-700 ease-out',
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
                 )}
                 key={index}
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
               >
                 {enableBox && boxBgClass ? (
-                  <div className={cn(boxBgClass, 'p-4 rounded-xl h-full')}>{content}</div>
+                  <div
+                    className={cn(
+                      boxBgClass,
+                      'p-4 rounded-xl h-full',
+                      'transition-all duration-300 ease-out',
+                      'hover:scale-[1.02]',
+                    )}
+                  >
+                    {content}
+                  </div>
                 ) : (
                   content
                 )}

@@ -16,12 +16,59 @@ type Props = {
 
 export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimonials }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [maxScroll, setMaxScroll] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const cardWidth = 400
   const [gap, setGap] = useState(24)
   const scrollAmount = cardWidth + gap
+
+  // Container visibility observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Card visibility observers
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    cardRefs.current.forEach((ref, index) => {
+      if (!ref) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => new Set(prev).add(index))
+          }
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -50px 0px' },
+      )
+
+      observer.observe(ref)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [testimonials])
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -88,7 +135,14 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
   const canScrollRight = hasOverflow && scrollPosition < maxScroll - 1
 
   return (
-    <div className={cn(className)}>
+    <div
+      ref={containerRef}
+      className={cn(
+        className,
+        'transition-opacity duration-700',
+        isVisible ? 'opacity-100' : 'opacity-0',
+      )}
+    >
       {/* Title Section */}
       {hasRichTextContent(title) && (
         <div className="mb-4 text-center px-8 lg:px-16 max-w-[60rem] justify-center mx-auto">
@@ -104,7 +158,11 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
             type="button"
             variant="ghost"
             size="icon"
-            className="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background"
+            className={cn(
+              'absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background',
+              'transition-all duration-300 ease-in-out',
+              'opacity-100 translate-x-0',
+            )}
             onClick={scrollLeft}
             aria-label="Scroll left"
           >
@@ -118,7 +176,11 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
             type="button"
             variant="ghost"
             size="icon"
-            className="absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background"
+            className={cn(
+              'absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background',
+              'transition-all duration-300 ease-in-out',
+              'opacity-100 translate-x-0',
+            )}
             onClick={scrollRight}
             aria-label="Scroll right"
           >
@@ -147,43 +209,56 @@ export const TestimonialsBlock: React.FC<Props> = ({ className, title, testimoni
           }}
         >
           <div className="flex gap-6 lg:gap-8 [&>*]:flex-shrink-0 w-fit mx-auto px-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id || index}
-                className="rounded-lg overflow-hidden p-8 cut-all-corners bg-card flex flex-col gap-6 w-[400px] flex-shrink-0 snap-start"
-              >
-                {/* Quote Section */}
-                {testimonial.quote && (
-                  <blockquote className="md:text-md lg:text-lg font-medium italic flex-1">
-                    &ldquo;{testimonial.quote}&rdquo;
-                  </blockquote>
-                )}
+            {testimonials.map((testimonial, index) => {
+              const isCardVisible = visibleCards.has(index)
 
-                {/* Name, School and Image Section */}
-                <div className="flex items-center gap-4">
-                  {testimonial.image && typeof testimonial.image === 'object' && (
-                    <div className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden">
-                      <Media
-                        resource={testimonial.image}
-                        fill
-                        imgClassName="object-cover"
-                        size="80px"
-                      />
-                    </div>
+              return (
+                <div
+                  key={testimonial.id || index}
+                  ref={(el) => {
+                    cardRefs.current[index] = el
+                  }}
+                  className={cn(
+                    'rounded-lg overflow-hidden p-8 cut-all-corners bg-card flex flex-col gap-6 w-[400px] flex-shrink-0 snap-start',
+                    'transition-all duration-500 ease-out',
+                    'hover:scale-[1.02]',
+                    isCardVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
                   )}
-                  <div className="flex-1 min-w-0">
-                    {testimonial.name && (
-                      <p className="font-semibold text-base lg:text-lg">{testimonial.name}</p>
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  {/* Quote Section */}
+                  {testimonial.quote && (
+                    <blockquote className="md:text-md lg:text-lg font-medium italic flex-1">
+                      &ldquo;{testimonial.quote}&rdquo;
+                    </blockquote>
+                  )}
+
+                  {/* Name, School and Image Section */}
+                  <div className="flex items-center gap-4">
+                    {testimonial.image && typeof testimonial.image === 'object' && (
+                      <div className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden transition-opacity duration-300">
+                        <Media
+                          resource={testimonial.image}
+                          fill
+                          imgClassName="object-cover"
+                          size="80px"
+                        />
+                      </div>
                     )}
-                    {testimonial.school && (
-                      <p className="text-sm lg:text-base text-muted-foreground mt-1">
-                        {testimonial.school}
-                      </p>
-                    )}
+                    <div className="flex-1 min-w-0">
+                      {testimonial.name && (
+                        <p className="font-semibold text-base lg:text-lg">{testimonial.name}</p>
+                      )}
+                      {testimonial.school && (
+                        <p className="text-sm lg:text-base text-muted-foreground mt-1">
+                          {testimonial.school}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>

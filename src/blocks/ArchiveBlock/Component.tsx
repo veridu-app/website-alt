@@ -3,10 +3,9 @@ import type { Post, ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-import RichText from '@/components/RichText'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
-import { CMSLink } from '@/components/Link'
+import { ArchiveBlockClient } from './ArchiveBlockClient'
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
@@ -67,22 +66,12 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <div id={`block-${id}`}>
-      {introContent && (
-        <div className="container mb-8 flex justify-center">
-          <RichText
-            className="mx-auto max-w-[48rem] text-center"
-            data={introContent}
-            enableGutter={false}
-          />
-        </div>
-      )}
-      <CollectionArchive posts={posts} />
-      {showViewAllLink && viewAllLink && (
-        <div className="container mt-8 text-center">
-          <CMSLink {...viewAllLink} />
-        </div>
-      )}
-    </div>
+    <ArchiveBlockClient
+      id={id}
+      introContent={introContent}
+      posts={posts}
+      showViewAllLink={showViewAllLink ?? undefined}
+      viewAllLink={viewAllLink}
+    />
   )
 }

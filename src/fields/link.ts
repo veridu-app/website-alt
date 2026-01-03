@@ -9,6 +9,7 @@ export type LinkAppearances =
   | 'secondary'
   | 'lavender'
   | 'light'
+  | 'dark-teal'
   | 'textbutton'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
@@ -35,6 +36,10 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
   light: {
     label: 'Light (White)',
     value: 'light',
+  },
+  'dark-teal': {
+    label: 'Dark Teal',
+    value: 'dark-teal',
   },
   textbutton: {
     label: 'Text Button',
@@ -161,6 +166,7 @@ export const link: LinkType = ({
       appearanceOptions.secondary,
       appearanceOptions.lavender,
       appearanceOptions.light,
+      appearanceOptions['dark-teal'],
       appearanceOptions.textbutton,
     ]
 
