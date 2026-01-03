@@ -103,6 +103,10 @@ export const TeamMembers: Block = {
           label: '4 Cards',
           value: '4',
         },
+        {
+          label: '5 Cards',
+          value: '5',
+        },
       ],
       admin: {
         description: 'Number of cards displayed per row on large screens',

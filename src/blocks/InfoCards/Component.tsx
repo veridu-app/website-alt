@@ -78,12 +78,16 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
   const shouldCenter = totalCards < cardsPerRowNumber
 
   const gridColsClass =
-    cardsPerRowValue === '4'
-      ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+    cardsPerRowValue === '5'
+      ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+      : cardsPerRowValue === '4'
+        ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+        : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
 
-  const cardPaddingClass = cardsPerRowValue === '4' ? 'p-3 sm:p-4' : 'p-5 sm:p-8'
-  const gridGapClass = cardsPerRowValue === '4' ? 'gap-3 sm:gap-4' : 'gap-5 sm:gap-8'
+  const cardPaddingClass =
+    cardsPerRowValue === '5' || cardsPerRowValue === '4' ? 'p-3 sm:p-4' : 'p-5 sm:p-8'
+  const gridGapClass =
+    cardsPerRowValue === '5' || cardsPerRowValue === '4' ? 'gap-3 sm:gap-4' : 'gap-5 sm:gap-8'
 
   return (
     <div ref={containerRef} className={cn('container overflow-visible', className)}>
@@ -107,7 +111,7 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
           dangerouslySetInnerHTML={{
             __html: `
               ${
-                cardsPerRowValue === '4'
+                cardsPerRowValue === '5'
                   ? `
                     @media (min-width: 768px) {
                       .info-cards-grid-centered-${totalCards} {
@@ -116,20 +120,41 @@ export const InfoCardsBlock: React.FC<Props> = ({ className, title, infoCards, c
                       }
                     }
                   `
-                  : `
-                    @media (min-width: 768px) {
-                      .info-cards-grid-centered-${totalCards} {
-                        grid-template-columns: repeat(${Math.min(totalCards, 2)}, minmax(0, 1fr)) !important;
-                        max-width: calc(100% * ${Math.min(totalCards, 2)} / 2);
+                  : cardsPerRowValue === '4'
+                    ? `
+                      @media (min-width: 768px) {
+                        .info-cards-grid-centered-${totalCards} {
+                          grid-template-columns: repeat(${Math.min(totalCards, 3)}, minmax(0, 1fr)) !important;
+                          max-width: calc(100% * ${Math.min(totalCards, 3)} / 3);
+                        }
                       }
-                    }
-                  `
+                    `
+                    : `
+                      @media (min-width: 768px) {
+                        .info-cards-grid-centered-${totalCards} {
+                          grid-template-columns: repeat(${Math.min(totalCards, 2)}, minmax(0, 1fr)) !important;
+                          max-width: calc(100% * ${Math.min(totalCards, 2)} / 2);
+                        }
+                      }
+                    `
               }
               @media (min-width: 1024px) {
                 .info-cards-grid-centered-${totalCards} {
                   grid-template-columns: repeat(${totalCards}, minmax(0, 1fr)) !important;
                   max-width: calc(100% * ${totalCards} / ${cardsPerRowNumber});
                 }
+              }
+              ${
+                cardsPerRowValue === '5'
+                  ? `
+                    @media (min-width: 1280px) {
+                      .info-cards-grid-centered-${totalCards} {
+                        grid-template-columns: repeat(${totalCards}, minmax(0, 1fr)) !important;
+                        max-width: calc(100% * ${totalCards} / ${cardsPerRowNumber});
+                      }
+                    }
+                  `
+                  : ''
               }
             `,
           }}

@@ -1076,7 +1076,7 @@ export interface InfoCardsBlock {
   /**
    * Number of cards displayed per row on large screens
    */
-  cardsPerRow?: ('3' | '4') | null;
+  cardsPerRow?: ('3' | '4' | '5') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'infoCards';
@@ -1136,7 +1136,7 @@ export interface TeamMembersBlock {
   /**
    * Number of cards displayed per row on large screens
    */
-  cardsPerRow?: ('3' | '4') | null;
+  cardsPerRow?: ('3' | '4' | '5') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'teamMembers';
